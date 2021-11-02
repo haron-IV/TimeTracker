@@ -1,5 +1,5 @@
 import { DB_NAME } from '../../config'
-import { DB_SCHEMA } from '../../config/DBSchema'
+import { DB_SCHEMA } from '../../config'
 
 class DBUtils {
   DBExist = () => !!localStorage.getItem(DB_NAME)

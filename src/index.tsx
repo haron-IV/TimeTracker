@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Normalize } from 'styled-normalize'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { DB } from './services'
@@ -8,6 +9,7 @@ const db = new DB() //TODO: perhaps it should be moved
 
 ReactDOM.render(
   <React.StrictMode>
+    <Normalize />
     <App />
   </React.StrictMode>,
   document.getElementById('root')

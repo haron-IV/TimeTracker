@@ -1,14 +1,27 @@
-function App() {
+import styled from 'styled-components'
+import { AppHeader } from './components'
+import { palette } from './config'
+import { Container } from './shared/components'
+
+const AppWrapper = styled('div')({
+  backgroundColor: palette.background.primary,
+  width: '100vw',
+  height: '100vh',
+})
+
+const App = () => {
   return (
-    <div className="App">
+    <AppWrapper>
+      <AppHeader />
+      <Container>elo</Container>
       {/* 
-        header - just empty bar
+        
         text area for time entry
         label for time entry
         time for time entry
         list of entries
       */}
-    </div>
+    </AppWrapper>
   )
 }
 
