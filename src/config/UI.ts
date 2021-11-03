@@ -1,5 +1,15 @@
 export const APP_HEADER_HEIGHT = 65
 export const CONTAINER_PADDING = APP_HEADER_HEIGHT + 20
+export const ENTRY_DESCRIPTION_FIELD_WIDTH = 350
+export const ENTRY_DESCRIPTION_FIELD_HEIGHT = 100
+export const LABEL_WRAPPER_WIDTH = 500
+export const LABEL_PADDING = 10
+export const LABEL_HEIGHT = 30
+export const LABEL_MARGIN = 15
+export const LABEL_WIDTH = 75
+export const TIME_FIELD_WIDTH = 80
+export const TIME_FIELD_MARGIN = 5
+
 export const palette = {
   primary: {
     dark: '#0288D1',
@@ -17,6 +27,7 @@ export const palette = {
   divider: '#BDBDBD',
   shadows: {
     box1: ' 0 3px 10px rgb(0 0 0 / 23%), 0 3px 10px rgb(0 0 0 / 16%)',
+    box2: ' 0 3px 5px rgb(0 0 0 / 20%), 0 3px 5px rgb(0 0 0 / 5%)',
   },
   background: {
     primary: '#FAFAFA',

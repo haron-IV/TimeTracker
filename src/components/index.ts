@@ -1,1 +1,6 @@
 export { default as AppHeader } from './AppHeader'
+export { default as EntryDescriptionField } from './EntryDescriptionField'
+export { default as TimeEntrySection } from './TimeEntrySection'
+export { default as Labels } from './Labels'
+export { default as EntryTimeField } from './EntryTimeField'
+export { default as AddEntryButton } from './AddEntryButton'
