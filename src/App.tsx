@@ -3,6 +3,7 @@ import {
   AddEntryButton,
   AppHeader,
   EntryDescriptionField,
+  EntryList,
   EntryTimeField,
   Labels,
   TimeEntrySection,
@@ -27,10 +28,8 @@ const App = () => {
           <EntryTimeField />
           <AddEntryButton />
         </TimeEntrySection>
+        <EntryList />
       </Container>
-      {/* 
-        list of entries
-      */}
     </AppWrapper>
   )
 }

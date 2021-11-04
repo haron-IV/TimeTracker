@@ -5,7 +5,7 @@ import { H1 } from '../../shared/components'
 const Header = styled('header')({
   height: APP_HEADER_HEIGHT,
   backgroundColor: palette.primary.dark,
-  boxShadow: palette.shadows.box1,
+  boxShadow: palette.shadows.box2,
   position: 'fixed',
   top: 0,
   width: '100%',

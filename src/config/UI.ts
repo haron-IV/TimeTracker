@@ -9,6 +9,10 @@ export const LABEL_MARGIN = 15
 export const LABEL_WIDTH = 75
 export const TIME_FIELD_WIDTH = 80
 export const TIME_FIELD_MARGIN = 5
+export const ENTRY_LIST_MARGIN_TOP = 50
+export const ENTRY_LIST_PADDING_TOP = 15
+export const ENTRY_LIST_ITEM_PADDING = 10
+export const DEFAULT_BORDER_RADIUS = 3
 
 export const palette = {
   primary: {
@@ -26,13 +30,14 @@ export const palette = {
   },
   divider: '#BDBDBD',
   shadows: {
-    box1: ' 0 3px 10px rgb(0 0 0 / 23%), 0 3px 10px rgb(0 0 0 / 16%)',
-    box2: ' 0 3px 5px rgb(0 0 0 / 20%), 0 3px 5px rgb(0 0 0 / 5%)',
+    box1: ' 0 3px 5px rgb(0 0 0 / 20%), 0 3px 5px rgb(0 0 0 / 5%)',
+    box2: ' 0 3px 10px rgb(0 0 0 / 23%), 0 3px 10px rgb(0 0 0 / 16%)',
   },
   background: {
-    primary: '#FAFAFA',
+    paper: '#FAFAFA',
+    primary: '#F4F4F4',
   },
-} // https://www.materialpalette.com/light-blue/blue-grey
+}
 
 export const typography = {
   h1: {
