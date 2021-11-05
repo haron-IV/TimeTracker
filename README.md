@@ -50,3 +50,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 > Palette: https://www.materialpalette.com/light-blue/blue-grey
 
 > Icons: https://react-icons.github.io/react-icons/icons?name=bs
+
+## Versions:
+0.0.0 - Damian Lillard
