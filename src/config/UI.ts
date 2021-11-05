@@ -6,9 +6,9 @@ export const LABEL_WRAPPER_WIDTH = 500
 export const LABEL_PADDING = 10
 export const LABEL_HEIGHT = 30
 export const LABEL_MARGIN = 15
-export const LABEL_WIDTH = 75
+export const LABEL_WIDTH = 100
 export const TIME_FIELD_WIDTH = 80
-export const TIME_FIELD_MARGIN = 5
+export const TIME_FIELD_MARGIN = 7
 export const ENTRY_LIST_MARGIN_TOP = 50
 export const ENTRY_LIST_PADDING_TOP = 15
 export const ENTRY_LIST_ITEM_PADDING = 10
@@ -37,6 +37,7 @@ export const palette = {
     paper: '#FAFAFA',
     primary: '#F4F4F4',
   },
+  error: '#ce1126',
 }
 
 export const typography = {
@@ -44,5 +45,15 @@ export const typography = {
     fontSize: '2rem',
     color: palette.text.text,
     margin: '0.5rem',
+  },
+  fontWeight: {
+    medium: 400,
+    bold: 700,
+  },
+}
+
+export const transition = {
+  time: {
+    fast: 200,
   },
 }

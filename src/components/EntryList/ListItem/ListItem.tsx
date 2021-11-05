@@ -7,6 +7,7 @@ import {
   palette,
 } from '../../../config'
 import { BsFillTrashFill } from 'react-icons/bs'
+import { MOCK_LABELS } from 'shared/mocks'
 
 const Item = styled('li')({
   padding: ENTRY_LIST_ITEM_PADDING,
@@ -32,8 +33,9 @@ const ListItem = () => {
   return (
     <Item>
       <EntryDescription>elo</EntryDescription>
-      <Labels />
-      <EntryTimeField />
+      <Labels labels={MOCK_LABELS} />
+      {/* <EntryTimeField /> */}{' '}
+      {/* TODO: uncomment it and add properties that are needed */}
       <button style={{ height: '100%', padding: '30px 10px' }}>
         <BsFillTrashFill color="accent" />
       </button>

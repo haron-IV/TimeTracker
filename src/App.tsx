@@ -1,13 +1,5 @@
 import styled from 'styled-components'
-import {
-  AddEntryButton,
-  AppHeader,
-  EntryDescriptionField,
-  EntryList,
-  EntryTimeField,
-  Labels,
-  TimeEntrySection,
-} from './components'
+import { AppHeader, EntryList, TimeEntrySection } from './components'
 import { palette } from './config'
 import { Container } from './shared/components'
 
@@ -22,12 +14,7 @@ const App = () => {
     <AppWrapper>
       <AppHeader />
       <Container>
-        <TimeEntrySection>
-          <EntryDescriptionField />
-          <Labels />
-          <EntryTimeField />
-          <AddEntryButton />
-        </TimeEntrySection>
+        <TimeEntrySection />
         <EntryList />
       </Container>
     </AppWrapper>

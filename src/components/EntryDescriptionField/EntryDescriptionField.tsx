@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'shared/types'
 import styled from 'styled-components'
 import {
   ENTRY_DESCRIPTION_FIELD_HEIGHT,
@@ -16,8 +17,19 @@ const TextArea = styled('textarea')({
   backgroundColor: palette.primary.light,
 })
 
-const EntryDescriptionField = () => {
-  return <TextArea />
+interface EntryDescriptionFieldProps {
+  value: string
+  onChange: (value: string) => void
 }
+
+const EntryDescriptionField = ({
+  value,
+  onChange,
+}: EntryDescriptionFieldProps) => (
+  <TextArea
+    onChange={(e: ChangeEvent<string>) => onChange(e.target.value)}
+    defaultValue={value}
+  />
+)
 
 export default EntryDescriptionField
