@@ -11,6 +11,8 @@ import {
   DEFAULT_BORDER_RADIUS,
 } from '../../config'
 
+// TODO: refactorize
+
 interface TimeFieldProps {
   error?: string
 }
