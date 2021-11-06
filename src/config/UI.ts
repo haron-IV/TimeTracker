@@ -30,8 +30,9 @@ export const palette = {
   },
   divider: '#BDBDBD',
   shadows: {
-    box1: ' 0 3px 5px rgb(0 0 0 / 20%), 0 3px 5px rgb(0 0 0 / 5%)',
-    box2: ' 0 3px 10px rgb(0 0 0 / 23%), 0 3px 10px rgb(0 0 0 / 16%)',
+    box0: '0 3px 3px rgb(0 0 0 / 11%), 0 3px 3px rgb(0 0 0 / 5%)',
+    box1: '0 3px 5px rgb(0 0 0 / 20%), 0 3px 5px rgb(0 0 0 / 5%)',
+    box2: '0 3px 10px rgb(0 0 0 / 23%), 0 3px 10px rgb(0 0 0 / 16%)',
   },
   background: {
     paper: '#FAFAFA',
@@ -54,6 +55,8 @@ export const typography = {
 
 export const transition = {
   time: {
+    instant: 100,
     fast: 200,
+    medium: 400,
   },
 }

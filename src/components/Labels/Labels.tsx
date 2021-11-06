@@ -1,5 +1,12 @@
 import { Label } from 'components/TimeEntrySection/TimeEntrySection.utils'
-import { memo, MouseEventHandler, useCallback } from 'react'
+import {
+  memo,
+  MouseEventHandler,
+  PropsWithChildren,
+  useCallback,
+  useState,
+} from 'react'
+import { BsPlus } from 'react-icons/bs'
 import { ID } from 'shared/types'
 import styled from 'styled-components'
 import {
@@ -11,15 +18,16 @@ import {
   LABEL_WRAPPER_WIDTH,
   palette,
   typography,
+  transition,
 } from '../../config'
 
 // TODO: refactorize
 
 interface LabelProps {
-  labelName: string
+  labelName?: string
   onClick: MouseEventHandler<HTMLButtonElement> & ((id: string) => void)
-  id: ID
-  active: boolean
+  id?: ID
+  active?: boolean
 }
 
 const StyledLabel = styled('button')<LabelProps>(({ active }) => ({
@@ -41,10 +49,15 @@ const StyledLabel = styled('button')<LabelProps>(({ active }) => ({
   fontWeight: active
     ? typography.fontWeight.bold
     : typography.fontWeight.medium,
+  transition: `all ease-in-out ${transition.time.instant}ms`,
+  '&:hover': {
+    boxShadow: palette.shadows.box0,
+    border: `1px solid ${palette.accent.accent}`,
+  },
 }))
 
-const LabelItem = (props: LabelProps) => {
-  return <StyledLabel {...props}>{props.labelName}</StyledLabel>
+const LabelItem = ({ children, ...props }: PropsWithChildren<LabelProps>) => {
+  return <StyledLabel {...props}>{children || props.labelName}</StyledLabel>
 }
 
 const LabelWrapper = styled('div')({
@@ -57,6 +70,17 @@ interface LabelsProps {
   labels?: Label[]
   onClick?: (id: ID) => void
   selectedLabels?: ID[]
+}
+
+const AddNewLabel = () => {
+  // TODO: add adding new label
+  const [labelName, setLabelName] = useState('')
+
+  return (
+    <LabelItem active={false} onClick={() => {}}>
+      <BsPlus />
+    </LabelItem>
+  )
 }
 
 const Labels = ({ labels, onClick, selectedLabels }: LabelsProps) => {
@@ -76,6 +100,7 @@ const Labels = ({ labels, onClick, selectedLabels }: LabelsProps) => {
           active={isLabelSelected(id)}
         />
       ))}
+      <AddNewLabel />
     </LabelWrapper>
   )
 }

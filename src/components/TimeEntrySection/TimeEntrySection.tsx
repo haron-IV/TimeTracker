@@ -6,7 +6,11 @@ import {
   EntryTimeField,
   Labels,
 } from '..'
-import { useTimeEntrySection } from './TimeEntrySection.utils'
+import {
+  useFieldValues,
+  useTimeEntrySection,
+  useToggleLabel,
+} from './TimeEntrySection.utils'
 import { MOCK_LABELS } from 'shared/mocks'
 import { ID } from 'shared/types'
 
@@ -31,15 +35,9 @@ const TimeEntrySection = ({ children }: TimeEntrySectionProps) => {
     setEntryTimeHours,
     entryTimeMinutes,
     setEntryTimeMinutes,
-  } = useTimeEntrySection()
+  } = useFieldValues()
 
-  const toggleLabel = (id: ID) => {
-    if (selectedLabels.includes(id))
-      setSelectedLabels(selectedLabels =>
-        selectedLabels.filter(item => item !== id)
-      )
-    else setSelectedLabels(selectedLabels => [...selectedLabels, id])
-  }
+  const toggleLabel = useToggleLabel(selectedLabels, setSelectedLabels)
 
   useEffect(() => {
     setLabels(MOCK_LABELS)
