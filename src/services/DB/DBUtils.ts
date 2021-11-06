@@ -1,3 +1,4 @@
+import { SpaceInfo } from 'shared/types'
 import { DB_NAME } from '../../config'
 import { DB_SCHEMA } from '../../config'
 
@@ -11,7 +12,8 @@ class DBUtils {
   DBExist = () => !!localStorage.getItem(DB_NAME)
   initDB = () => localStorage.setItem(DB_NAME, JSON.stringify(DB_SCHEMA))
   getDB = () => (this.DBExist() ? localStorage.getItem(DB_NAME) : null)
-  getDbSpace = () => {
+
+  getDbSpace = (): SpaceInfo => {
     const data = this.getDB()
     const memoryUsed = data
       ? Number(((data.length * 16) / (8 * 1024)).toFixed(2))

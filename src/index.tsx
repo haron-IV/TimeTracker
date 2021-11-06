@@ -3,11 +3,7 @@ import ReactDOM from 'react-dom'
 import { Normalize } from 'styled-normalize'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { DB } from './services'
 
-const db = new DB() //TODO: perhaps it should be moved
-const space = db.getDbSpace()
-console.log(space)
 ReactDOM.render(
   <React.StrictMode>
     <Normalize />

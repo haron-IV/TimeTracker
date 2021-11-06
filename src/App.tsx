@@ -1,3 +1,5 @@
+import AppFooter from 'components/AppFooter/AppFooter'
+import { DB } from 'services'
 import styled from 'styled-components'
 import { AppHeader, EntryList, TimeEntrySection } from './components'
 import { palette } from './config'
@@ -9,6 +11,9 @@ const AppWrapper = styled('div')({
   height: '100vh',
 })
 
+const db = new DB()
+const spaceInfo = db.getDbSpace()
+
 const App = () => {
   return (
     <AppWrapper>
@@ -17,6 +22,7 @@ const App = () => {
         <TimeEntrySection />
         <EntryList />
       </Container>
+      <AppFooter spaceInfo={spaceInfo} />
     </AppWrapper>
   )
 }

@@ -13,6 +13,7 @@ export const ENTRY_LIST_MARGIN_TOP = 50
 export const ENTRY_LIST_PADDING_TOP = 15
 export const ENTRY_LIST_ITEM_PADDING = 10
 export const DEFAULT_BORDER_RADIUS = 3
+export const FOOTER_PADDING = 15
 
 export const palette = {
   primary: {

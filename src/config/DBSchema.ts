@@ -1,1 +1,6 @@
-export const DB_SCHEMA = {}
+export const DB_SCHEMA = {
+  cfg: {
+    labels: [],
+  },
+  timeEntries: [],
+}
