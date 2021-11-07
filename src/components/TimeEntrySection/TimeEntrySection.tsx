@@ -8,6 +8,7 @@ import {
 } from '..'
 import {
   useFieldValues,
+  useOnAdd,
   useTimeEntrySection,
   useToggleLabel,
 } from './TimeEntrySection.utils'
@@ -38,6 +39,12 @@ const TimeEntrySection = ({ children }: TimeEntrySectionProps) => {
   } = useFieldValues()
 
   const toggleLabel = useToggleLabel(selectedLabels, setSelectedLabels)
+  const onAddEntry = useOnAdd({
+    timeEntryDescription,
+    selectedLabels,
+    entryTimeHours,
+    entryTimeMinutes,
+  })
 
   useEffect(() => {
     setLabels(MOCK_LABELS)
@@ -60,7 +67,7 @@ const TimeEntrySection = ({ children }: TimeEntrySectionProps) => {
         setHours={setEntryTimeHours}
         setMinutes={setEntryTimeMinutes}
       />
-      <AddEntryButton />
+      <AddEntryButton onClick={onAddEntry} />
     </Section>
   )
 }

@@ -1,5 +1,8 @@
 import { useCallback, useState } from 'react'
+import { DB } from 'services'
 import { ID } from 'shared/types'
+
+const db = new DB()
 
 export interface Label {
   id: ID
@@ -45,3 +48,12 @@ export const useFieldValues = () => {
     setEntryTimeMinutes,
   }
 }
+
+//TODO: move to more porper place
+export interface UseOnAddProps {
+  timeEntryDescription: string
+  selectedLabels: SelectedLabels
+  entryTimeHours: number
+  entryTimeMinutes: number
+}
+export const useOnAdd = (props: UseOnAddProps) => () => db.addTimeEntry(props)
