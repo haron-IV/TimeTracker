@@ -19,19 +19,17 @@ interface SpaceInfoItemProps {
   percentage: string
 }
 
-const SpaceInfoItem = ({ kb, percentage }: SpaceInfoItemProps) => {
-  return (
-    <span>
-      {kb} / {percentage}
-    </span>
-  )
-}
+const SpaceInfoItem = ({ kb, percentage }: SpaceInfoItemProps) => (
+  <span>
+    {kb} / {percentage}
+  </span>
+)
 
 interface AppFooterProps {
   spaceInfo: SpaceInfo
 }
 
-const AppFooter = ({ spaceInfo: { left, used } }: AppFooterProps) => {
+const AppFooter = ({ spaceInfo: { used } }: AppFooterProps) => {
   return (
     <Footer>
       <div>

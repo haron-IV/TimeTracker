@@ -17,7 +17,8 @@ interface TimeFieldProps {
   error?: string
 }
 
-const TimeField = styled('input')<TimeFieldProps>(({ error }) => ({
+//TODO: make this component shared
+export const TimeField = styled('input')<TimeFieldProps>(({ error }) => ({
   width: TIME_FIELD_WIDTH,
   margin: `0 ${TIME_FIELD_MARGIN}px`,
   padding: TIME_FIELD_MARGIN,
@@ -43,14 +44,15 @@ const FieldWrapper = styled('div')({
 const Form = styled('form')({
   display: 'flex',
 })
-const ErrorIndicator = styled('div')<TimeFieldProps>(({ error }) => ({
+//TODO: make this component shared
+export const ErrorIndicator = styled('div')<TimeFieldProps>(({ error }) => ({
   color: palette.error,
   fontSize: '0.75rem',
   marginTop: TIME_FIELD_MARGIN,
   marginLeft: TIME_FIELD_MARGIN,
 }))
 
-type setFunction = (value: number) => void
+export type setFunction = (value: number) => void
 interface EntryTimeFieldProps {
   hours: number
   minutes: number
