@@ -1,3 +1,4 @@
+import { Label } from 'components/TimeEntrySection/TimeEntrySection.utils' //TODO: it should be shared as well
 import { TimeEntry } from 'services/DB'
 
 export const DB_SCHEMA = {
@@ -9,7 +10,7 @@ export const DB_SCHEMA = {
 
 export type DBSchema = {
   cfg: {
-    labels: string[]
+    labels: Label[]
   }
   timeEntries: TimeEntry[]
 }

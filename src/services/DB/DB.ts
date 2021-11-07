@@ -15,6 +15,20 @@ class DB extends DBUtils {
     const updatedDB = { ...db, timeEntries }
     this.saveDB(updatedDB)
   }
+
+  getTimeEntries = () => {
+    const { timeEntries } = this.getDB()
+
+    return timeEntries
+  }
+
+  getLabels = () => {
+    const {
+      cfg: { labels },
+    } = this.getDB()
+
+    return labels
+  }
 }
 
 export default DB

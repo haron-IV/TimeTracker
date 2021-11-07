@@ -14,10 +14,12 @@ import {
 } from './TimeEntrySection.utils'
 import { MOCK_LABELS } from 'shared/mocks'
 import { ID } from 'shared/types'
+import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
 
 const Section = styled('section')({
   display: 'flex',
   justifyContent: 'space-between',
+  height: TIME_ENTRY_SECTION_HEIGHT,
 })
 
 // TODO: refactorize
@@ -45,10 +47,6 @@ const TimeEntrySection = ({ children }: TimeEntrySectionProps) => {
     entryTimeHours,
     entryTimeMinutes,
   })
-
-  useEffect(() => {
-    setLabels(MOCK_LABELS)
-  }, [])
 
   return (
     <Section>

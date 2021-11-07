@@ -5,9 +5,13 @@ import {
   ENTRY_DESCRIPTION_FIELD_WIDTH,
   ENTRY_LIST_ITEM_PADDING,
   palette,
+  TIME_MULTIPLY_RATIO,
+  ENTRY_LIST_ITEM_MARGIN,
 } from '../../../config'
 import { BsFillTrashFill } from 'react-icons/bs'
 import { MOCK_LABELS } from 'shared/mocks'
+import { TimeEntry } from 'services/DB'
+import { Label } from 'components/TimeEntrySection/TimeEntrySection.utils'
 
 const Item = styled('li')({
   padding: ENTRY_LIST_ITEM_PADDING,
@@ -18,6 +22,7 @@ const Item = styled('li')({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  marginBottom: ENTRY_LIST_ITEM_MARGIN,
 })
 
 const EntryDescription = styled('textarea')({
@@ -29,13 +34,38 @@ const EntryDescription = styled('textarea')({
   borderRadius: DEFAULT_BORDER_RADIUS,
 })
 
-const ListItem = () => {
+interface ListItemProps extends TimeEntry {
+  labels: Label[]
+}
+
+//TODO: refactorize it
+
+const ListItem = ({
+  entryTimeHours,
+  entryTimeMinutes,
+  selectedLabels,
+  timeEntryDescription,
+  labels,
+}: ListItemProps) => {
+  const calculateTimeEntry = (hours: number, minutes: number) => {
+    const scaledTime = minutes / TIME_MULTIPLY_RATIO
+
+    return `${hours}.${scaledTime}`
+  }
+
   return (
     <Item>
-      <EntryDescription>elo</EntryDescription>
-      <Labels labels={MOCK_LABELS} />
-      {/* <EntryTimeField /> */}{' '}
-      {/* TODO: uncomment it and add properties that are needed */}
+      <EntryDescription>{timeEntryDescription}</EntryDescription>
+      <Labels labels={labels} />
+      <EntryTimeField
+        hours={entryTimeHours}
+        minutes={entryTimeMinutes}
+        setHours={() => {}}
+        setMinutes={() => {}}
+      />
+      <div>
+        Scaled time: {calculateTimeEntry(entryTimeHours, entryTimeMinutes)}
+      </div>
       <button style={{ height: '100%', padding: '30px 10px' }}>
         <BsFillTrashFill color="accent" />
       </button>

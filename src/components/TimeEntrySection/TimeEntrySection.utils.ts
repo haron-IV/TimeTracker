@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { DB } from 'services'
 import { ID } from 'shared/types'
 
@@ -30,7 +30,7 @@ export const useTimeEntrySection = () => {}
 
 export const useFieldValues = () => {
   const [timeEntryDescription, setTimeEntryDescription] = useState('')
-  const [labels, setLabels] = useState<Label[]>()
+  const [labels, setLabels] = useState<Label[]>(db.getLabels())
   const [selectedLabels, setSelectedLabels] = useState<SelectedLabels>([])
   const [entryTimeHours, setEntryTimeHours] = useState(0)
   const [entryTimeMinutes, setEntryTimeMinutes] = useState(0)
