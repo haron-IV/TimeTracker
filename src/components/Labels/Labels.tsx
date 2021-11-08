@@ -1,12 +1,17 @@
-import { Label } from 'components/TimeEntrySection/TimeEntrySection.utils'
+import {
+  Label,
+  LabelsContext,
+} from 'components/TimeEntrySection/TimeEntrySection.utils'
 import {
   memo,
   MouseEventHandler,
   PropsWithChildren,
   useCallback,
+  useContext,
   useState,
 } from 'react'
-import { BsPlus } from 'react-icons/bs'
+import { BsFillTrashFill, BsPlus } from 'react-icons/bs'
+import { DB } from 'services'
 import { ID } from 'shared/types'
 import styled from 'styled-components'
 import {
@@ -22,6 +27,8 @@ import {
 } from '../../config'
 
 // TODO: refactorize
+
+const db = new DB()
 
 interface LabelProps {
   labelName?: string
@@ -72,23 +79,57 @@ interface LabelsProps {
   selectedLabels?: ID[]
 }
 
-const AddNewLabel = () => {
+interface AddNewLabelProps {
+  onAdd?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const AddNewLabel = ({ onAdd }: AddNewLabelProps) => {
   // TODO: add adding new label
+  const [isInitiated, setInitiated] = useState(false)
   const [labelName, setLabelName] = useState('')
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setLabelName(e.target.value)
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.charCode !== 13) return
+    db.addNewLabel(labelName)
+    setInitiated(false)
+    onAdd && onAdd(true)
+    setLabelName('')
+  }
 
   return (
-    <LabelItem active={false} onClick={() => {}}>
-      <BsPlus />
-    </LabelItem>
+    <>
+      <LabelItem active={false} onClick={() => setInitiated(true)}>
+        {isInitiated ? (
+          <input
+            value={labelName}
+            onChange={handleOnChange}
+            placeholder="label name"
+            onKeyPress={onKeyPress}
+            autoFocus
+          />
+        ) : (
+          <BsPlus />
+        )}
+      </LabelItem>
+      {isInitiated && (
+        <button onClick={() => setInitiated(false)}>
+          <BsFillTrashFill />
+        </button>
+      )}
+    </>
   )
 }
 
 const Labels = ({ labels, onClick, selectedLabels }: LabelsProps) => {
+  const ctx = useContext(LabelsContext)
+
   const isLabelSelected = useCallback(
     (id: ID) => !!selectedLabels?.includes(id),
     [selectedLabels]
   )
-  console.log(selectedLabels)
+
   return (
     <LabelWrapper>
       {labels?.map(({ id, name }) => (
@@ -100,7 +141,7 @@ const Labels = ({ labels, onClick, selectedLabels }: LabelsProps) => {
           active={isLabelSelected(id)}
         />
       ))}
-      <AddNewLabel />
+      <AddNewLabel onAdd={ctx?.setUpdateLabels} />
     </LabelWrapper>
   )
 }

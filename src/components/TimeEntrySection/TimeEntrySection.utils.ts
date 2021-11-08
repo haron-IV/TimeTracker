@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { createContext, useCallback, useEffect, useState } from 'react'
 import { DB } from 'services'
 import { ID } from 'shared/types'
 
@@ -27,6 +27,11 @@ export const useToggleLabel = (
   )
 
 export const useTimeEntrySection = () => {}
+
+export const LabelsContext = createContext<{
+  updateLabels: boolean
+  setUpdateLabels: React.Dispatch<React.SetStateAction<boolean>>
+} | null>(null)
 
 export const useFieldValues = () => {
   const [timeEntryDescription, setTimeEntryDescription] = useState('')

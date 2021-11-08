@@ -46,7 +46,7 @@ class DBUtils {
     const partOne = getPart()
     const partTwo = getPart()
 
-    return partOne + partTwo
+    return `${partOne}${partTwo}`
   }
 }
 

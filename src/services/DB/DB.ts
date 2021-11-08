@@ -29,6 +29,13 @@ class DB extends DBUtils {
 
     return labels
   }
+
+  addNewLabel = (name: string) => {
+    const db = this.getDB()
+    const labels = [...db.cfg.labels, { id: this.UUID(), name }]
+    const updatedDB = { ...db, cfg: { ...db.cfg, labels } }
+    this.saveDB(updatedDB)
+  }
 }
 
 export default DB
