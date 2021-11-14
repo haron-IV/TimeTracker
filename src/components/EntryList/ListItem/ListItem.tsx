@@ -8,7 +8,7 @@ import {
   TIME_MULTIPLY_RATIO,
   ENTRY_LIST_ITEM_MARGIN,
 } from '../../../config'
-import { BsFillTrashFill } from 'react-icons/bs'
+import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 import { MOCK_LABELS } from 'shared/mocks'
 import { TimeEntry } from 'services/DB'
 import { Label } from 'components/TimeEntrySection/TimeEntrySection.utils'
@@ -48,15 +48,27 @@ const ListItem = ({
   labels,
 }: ListItemProps) => {
   const calculateTimeEntry = (hours: number, minutes: number) => {
-    const scaledTime = minutes / TIME_MULTIPLY_RATIO
+    const scaledTime = Math.floor(minutes / TIME_MULTIPLY_RATIO)
 
     return `${hours}.${scaledTime}`
+  }
+
+  const getSelectedLabels = () => {
+    const filteredLabels: string[] = []
+    for (const { id } of labels) {
+      const label = selectedLabels.find(
+        selectedLabelId => selectedLabelId === id
+      )
+      label && filteredLabels.push(label)
+    }
+
+    return filteredLabels
   }
 
   return (
     <Item>
       <EntryDescription>{timeEntryDescription}</EntryDescription>
-      <Labels labels={labels} />
+      <Labels labels={labels} selectedLabels={getSelectedLabels()} />
       <EntryTimeField
         hours={entryTimeHours}
         minutes={entryTimeMinutes}
@@ -66,9 +78,14 @@ const ListItem = ({
       <div>
         Scaled time: {calculateTimeEntry(entryTimeHours, entryTimeMinutes)}
       </div>
-      <button style={{ height: '100%', padding: '30px 10px' }}>
-        <BsFillTrashFill color="accent" />
-      </button>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <button style={{ height: '50%', padding: '5px 10px' }}>
+          <BsFillTrashFill color="accent" />
+        </button>
+        <button style={{ height: '50%', padding: '5px 10px' }}>
+          <BsFillPencilFill color="accent" />
+        </button>
+      </div>
     </Item>
   )
 }
