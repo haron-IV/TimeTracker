@@ -1,7 +1,4 @@
-import {
-  Label,
-  LabelsContext,
-} from 'components/TimeEntrySection/TimeEntrySection.utils'
+import { Label } from 'components/TimeEntrySection/TimeEntrySection.utils'
 import {
   memo,
   MouseEventHandler,
@@ -13,6 +10,7 @@ import {
 import { BsFillTrashFill, BsPlus } from 'react-icons/bs'
 import { DB } from 'services'
 import { ID } from 'shared/types'
+import { LabelsContext } from 'shared/utils'
 import styled from 'styled-components'
 import {
   DEFAULT_BORDER_RADIUS,

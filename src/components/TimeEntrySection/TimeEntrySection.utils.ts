@@ -1,6 +1,7 @@
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { DB } from 'services'
 import { ID } from 'shared/types'
+import { EntryListContext } from 'shared/utils'
 
 const db = new DB()
 
@@ -25,13 +26,6 @@ export const useToggleLabel = (
     },
     [selectedLabels, setSelectedLabels]
   )
-
-export const useTimeEntrySection = () => {}
-
-export const LabelsContext = createContext<{
-  updateLabels: boolean
-  setUpdateLabels: React.Dispatch<React.SetStateAction<boolean>>
-} | null>(null)
 
 export const useFieldValues = () => {
   const [timeEntryDescription, setTimeEntryDescription] = useState('')
@@ -61,4 +55,11 @@ export interface UseOnAddProps {
   entryTimeHours: number
   entryTimeMinutes: number
 }
-export const useOnAdd = (props: UseOnAddProps) => () => db.addTimeEntry(props)
+export const useOnAdd = (props: UseOnAddProps) => {
+  const ctx = useContext(EntryListContext)
+
+  return () => {
+    ctx?.setUpdateEntryList(true)
+    db.addTimeEntry(props)
+  }
+}

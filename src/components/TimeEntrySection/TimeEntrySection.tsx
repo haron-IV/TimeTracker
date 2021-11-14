@@ -5,18 +5,15 @@ import {
   EntryDescriptionField,
   EntryTimeField,
   Labels,
-} from '..'
+} from '../index'
 import {
-  LabelsContext,
   useFieldValues,
   useOnAdd,
-  useTimeEntrySection,
   useToggleLabel,
 } from './TimeEntrySection.utils'
-import { MOCK_LABELS } from 'shared/mocks'
-import { ID } from 'shared/types'
 import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
 import { DB } from 'services'
+import { LabelsContext } from 'shared/utils'
 
 const db = new DB()
 

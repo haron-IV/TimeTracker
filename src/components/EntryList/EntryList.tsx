@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { DB } from 'services'
+import { EntryListContext } from 'shared/utils'
 import styled from 'styled-components'
 import {
   ENTRY_LIST_MARGIN_TOP,
@@ -29,9 +30,14 @@ const List = styled('ul')({
 //TODO: refactorize this file
 
 const EntryList = () => {
+  const ctx = useContext(EntryListContext)
   const [timeEntryItems, setTimeEntryItems] = useState(db.getTimeEntries())
 
-  console.log(timeEntryItems.length)
+  useEffect(() => {
+    if (!ctx?.updateEntryList) return
+    setTimeEntryItems(db.getTimeEntries())
+    ctx.setUpdateEntryList(false)
+  }, [ctx?.updateEntryList])
 
   return (
     <EntryListSection>
