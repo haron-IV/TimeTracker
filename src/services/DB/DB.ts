@@ -11,7 +11,11 @@ class DB extends DBUtils {
 
   addTimeEntry = (timeEntry: AddTimeEntryParams) => {
     const db = this.getDB()
-    const timeEntries = [...db.timeEntries, { ...timeEntry, id: this.UUID() }]
+    const date = this.getDate()
+    const timeEntries = [
+      ...db.timeEntries,
+      { ...timeEntry, id: this.UUID(), date },
+    ]
     const updatedDB = { ...db, timeEntries }
     this.saveDB(updatedDB)
   }

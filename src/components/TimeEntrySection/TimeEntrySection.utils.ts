@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { DB } from 'services'
 import { ID } from 'shared/types'
 import { EntryListContext } from 'shared/utils'
