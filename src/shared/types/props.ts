@@ -1,2 +1,2 @@
 export type ChangeEvent<T> = React.ChangeEvent<{ value: T }>
-export type ID = string
+export type setTimeFunc = (value: number) => void

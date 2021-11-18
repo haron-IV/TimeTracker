@@ -27,8 +27,6 @@ const List = styled('ul')({
   padding: `${ENTRY_LIST_PADDING_TOP}px 0 0 0`,
 })
 
-//TODO: refactorize this file
-
 const EntryList = () => {
   const ctx = useContext(EntryListContext)
   const [timeEntryItems, setTimeEntryItems] = useState(db.getTimeEntries())

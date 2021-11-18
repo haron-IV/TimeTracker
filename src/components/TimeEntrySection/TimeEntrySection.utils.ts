@@ -1,14 +1,9 @@
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { DB } from 'services'
-import { ID } from 'shared/types'
+import { ID, Label } from 'shared/types'
 import { EntryListContext } from 'shared/utils'
 
 const db = new DB()
-
-export interface Label {
-  id: ID
-  name: string
-}
 
 type SelectedLabels = Label['id'][]
 
@@ -48,8 +43,7 @@ export const useFieldValues = () => {
   }
 }
 
-//TODO: move to more porper place
-export interface UseOnAddProps {
+interface UseOnAddProps {
   timeEntryDescription: string
   selectedLabels: SelectedLabels
   entryTimeHours: number
@@ -62,4 +56,15 @@ export const useOnAdd = (props: UseOnAddProps) => {
     ctx?.setUpdateEntryList(true)
     db.addTimeEntry(props)
   }
+}
+
+export const useUpdateLabels = (setLabels: (labels: Label[]) => void) => {
+  const [updateLabels, setUpdateLabels] = useState(false)
+
+  useEffect(() => {
+    if (updateLabels) setLabels(db.getLabels())
+    setUpdateLabels(false)
+  }, [updateLabels, setLabels])
+
+  return { updateLabels, setUpdateLabels }
 }

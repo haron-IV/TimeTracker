@@ -1,4 +1,5 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
+import { LabelsContext } from 'shared/utils'
 import styled from 'styled-components'
 import {
   AddEntryButton,
@@ -10,12 +11,8 @@ import {
   useFieldValues,
   useOnAdd,
   useToggleLabel,
+  useUpdateLabels,
 } from './TimeEntrySection.utils'
-import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
-import { DB } from 'services'
-import { LabelsContext } from 'shared/utils'
-
-const db = new DB()
 
 const Section = styled('section')({
   display: 'flex',
@@ -23,11 +20,7 @@ const Section = styled('section')({
   height: TIME_ENTRY_SECTION_HEIGHT,
 })
 
-// TODO: refactorize
-
-interface TimeEntrySectionProps extends PropsWithChildren<{}> {}
-
-const TimeEntrySection = ({ children }: TimeEntrySectionProps) => {
+const TimeEntrySection = () => {
   const {
     timeEntryDescription,
     setTimeEntryDescription,
@@ -48,12 +41,8 @@ const TimeEntrySection = ({ children }: TimeEntrySectionProps) => {
     entryTimeHours,
     entryTimeMinutes,
   })
-  const [updateLabels, setUpdateLabels] = useState(false)
 
-  useEffect(() => {
-    if (updateLabels) setLabels(db.getLabels())
-    setUpdateLabels(false)
-  }, [updateLabels])
+  const { updateLabels, setUpdateLabels } = useUpdateLabels(setLabels)
 
   return (
     <Section>

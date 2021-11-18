@@ -1,9 +1,11 @@
+import { ID } from 'shared/types'
+
 export interface TimeEntry {
   timeEntryDescription: string
   selectedLabels: string[]
   entryTimeHours: number
   entryTimeMinutes: number
-  id: string
+  id: ID
   date: string
 }
 

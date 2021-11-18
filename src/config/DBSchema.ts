@@ -1,5 +1,5 @@
-import { Label } from 'components/TimeEntrySection/TimeEntrySection.utils' //TODO: it should be shared as well
 import { TimeEntry } from 'services/DB'
+import { Label } from 'shared/types'
 
 export const DB_SCHEMA = {
   cfg: {
