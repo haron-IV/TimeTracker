@@ -1,44 +1,37 @@
-import styled from 'styled-components'
-import {
-  LABEL_HEIGHT,
-  LABEL_MARGIN,
-  LABEL_PADDING,
-  LABEL_WIDTH,
-  LABEL_WRAPPER_WIDTH,
-} from '../../config'
+import { memo, useCallback, useContext } from 'react'
+import { ID, Label } from 'shared/types'
+import { LabelsContext } from 'shared/utils'
+import { AddNewLabel, LabelItem } from './AddNewLabel'
+import { LabelWrapper } from './Labels.style'
 
-interface LabelProps {
-  labelName: string
+interface LabelsProps {
+  labels?: Label[]
+  onClick?: (id: ID) => void
+  selectedLabels?: ID[]
 }
 
-const StyledLabel = styled('div')({
-  padding: LABEL_PADDING,
-  height: LABEL_HEIGHT,
-  margin: `0 ${LABEL_MARGIN}px`,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minWidth: LABEL_WIDTH,
-})
+const Labels = ({ labels, onClick, selectedLabels }: LabelsProps) => {
+  const ctx = useContext(LabelsContext)
 
-const Label = ({ labelName }: LabelProps) => {
-  return <StyledLabel>{labelName}</StyledLabel>
-}
+  const isLabelSelected = useCallback(
+    (id: ID) => !!selectedLabels?.includes(id),
+    [selectedLabels]
+  )
 
-const LabelWrapper = styled('div')({
-  display: 'flex',
-  width: LABEL_WRAPPER_WIDTH,
-  flexWrap: 'wrap',
-})
-
-const Labels = () => {
   return (
     <LabelWrapper>
-      {[1, 2, 3, 4, 5].map(item => (
-        <Label labelName={`Label ${item}`} />
+      {labels?.map(({ id, name }) => (
+        <LabelItem
+          labelName={name}
+          key={id}
+          id={id}
+          onClick={() => onClick && onClick(id)}
+          active={isLabelSelected(id)}
+        />
       ))}
+      <AddNewLabel onAdd={ctx?.setUpdateLabels} />
     </LabelWrapper>
   )
 }
 
-export default Labels
+export default memo(Labels)

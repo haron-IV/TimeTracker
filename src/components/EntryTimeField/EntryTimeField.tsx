@@ -1,21 +1,60 @@
-import styled from 'styled-components'
-import { palette, TIME_FIELD_MARGIN, TIME_FIELD_WIDTH } from '../../config'
+import { ErrorIndicator } from 'shared/components'
+import { setTimeFunc } from 'shared/types'
+import { HOURS_LIMIT, MINUTES_LIMIT } from '../../config'
+import { useEntryTimeField } from './EntryTime.utils'
+import {
+  FieldWrapper,
+  Form,
+  TimeField,
+  TimeLabel,
+} from './EntryTimeField.style'
 
-const TimeField = styled('input')({
-  width: TIME_FIELD_WIDTH,
-  margin: `0 ${TIME_FIELD_MARGIN}px`,
-  padding: TIME_FIELD_MARGIN,
-  outline: `1px solid ${palette.primary.dark}`,
-  color: palette.text.dark,
-})
+interface EntryTimeFieldProps {
+  hours: number
+  minutes: number
+  setHours?: setTimeFunc
+  setMinutes?: setTimeFunc
+}
 
-const EntryTimeField = () => {
+const EntryTimeField = ({
+  hours,
+  minutes,
+  setHours,
+  setMinutes,
+}: EntryTimeFieldProps) => {
+  const { error, handleChange } = useEntryTimeField()
+
   return (
-    <form>
-      <TimeField name="hours" placeholder="hours" type="number" />
-      :
-      <TimeField name="minutes" placeholder="minutes" type="number" />
-    </form>
+    <Form>
+      <FieldWrapper>
+        <TimeLabel visible={!!hours}>Hours</TimeLabel>
+        <TimeField
+          name="hours"
+          placeholder="hours"
+          type="number"
+          value={hours || ''}
+          onChange={e => handleChange(e.target.value, HOURS_LIMIT, setHours)}
+          max={HOURS_LIMIT}
+          error={error.hours}
+        />
+        <ErrorIndicator error={error.hours}>{error.hours}</ErrorIndicator>
+      </FieldWrapper>
+
+      <FieldWrapper>
+        <TimeLabel visible={!!minutes}>Minutes</TimeLabel>
+        <TimeField
+          name="minutes"
+          placeholder="minutes"
+          type="number"
+          value={minutes || ''}
+          onChange={e =>
+            handleChange(e.target.value, MINUTES_LIMIT, setMinutes)
+          }
+          error={error.minutes}
+        />
+        <ErrorIndicator error={error.minutes}>{error.minutes}</ErrorIndicator>
+      </FieldWrapper>
+    </Form>
   )
 }
 
