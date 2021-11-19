@@ -1,5 +1,11 @@
 import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
-import { EntryListSection, List } from './EntryList.style'
+import {
+  Button,
+  ControlsWrapper,
+  DateWrapper,
+  EntryListSection,
+  List,
+} from './EntryList.style'
 import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
 
@@ -7,21 +13,20 @@ const EntryList = () => {
   const { entriesFromDay, labels, targetDate, setTargetDate } = useEntryList()
   const setDate = useChangeDate(setTargetDate, targetDate)
 
-  //TODO: refactorize this component
   return (
     <EntryListSection>
       <div>
         <b>Selected date:</b>
-        <div>
-          <button onClick={() => setDate(-1)}>
+        <ControlsWrapper>
+          <Button onClick={() => setDate(-1)} side="left">
             <BsArrowLeftCircle />
-          </button>
+          </Button>
           {/* FIXME: there is a bug with empty entry after changing the date */}
-          {targetDate}
-          <button onClick={() => setDate(1)}>
+          <DateWrapper>{targetDate}</DateWrapper>
+          <Button onClick={() => setDate(1)} side="right">
             <BsArrowRightCircle />
-          </button>
-        </div>
+          </Button>
+        </ControlsWrapper>
       </div>
       <List>
         {entriesFromDay.map(item => (
