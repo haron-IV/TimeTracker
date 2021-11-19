@@ -1,8 +1,14 @@
-import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
+import { palette } from 'config'
+import {
+  BsArrowLeftCircle,
+  BsArrowRightCircle,
+  BsExclamationOctagon,
+} from 'react-icons/bs'
 import {
   Button,
   ControlsWrapper,
-  DateWrapper,
+  DateField,
+  EmptyList,
   EntryListSection,
   List,
 } from './EntryList.style'
@@ -12,6 +18,9 @@ import ListItem from './ListItem'
 const EntryList = () => {
   const { entriesFromDay, labels, targetDate, setTargetDate } = useEntryList()
   const setDate = useChangeDate(setTargetDate, targetDate)
+  const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTargetDate(e.target.value)
+  }
 
   return (
     <EntryListSection>
@@ -21,7 +30,8 @@ const EntryList = () => {
           <Button onClick={() => setDate(-1)} side="left">
             <BsArrowLeftCircle />
           </Button>
-          <DateWrapper>{targetDate}</DateWrapper>
+          <DateField type="date" value={targetDate} onChange={onDateChange} />
+          {/* <DateWrapper>{targetDate}</DateWrapper> */}
           <Button onClick={() => setDate(1)} side="right">
             <BsArrowRightCircle />
           </Button>
@@ -31,6 +41,12 @@ const EntryList = () => {
         {entriesFromDay.map(item => (
           <ListItem key={item.id} {...item} labels={labels} />
         ))}
+        {entriesFromDay.length === 0 && (
+          <EmptyList>
+            <h1>No time entries</h1>
+            <BsExclamationOctagon size={100} color={palette.accent.accent} />
+          </EmptyList>
+        )}
       </List>
     </EntryListSection>
   )

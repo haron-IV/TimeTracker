@@ -12,7 +12,7 @@ import {
   transition,
   typography,
 } from 'config'
-import styled from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 export const EntryListSection = styled('section')({
   borderTop: `1px solid ${palette.divider}`,
@@ -56,6 +56,15 @@ export const Button = styled('button')<ButtonProps>(({ side }) => ({
   },
 }))
 
-export const DateWrapper = styled('div')({
+export const DateField = styled('input')({
   fontSize: typography.fontSize.regular,
+})
+
+export const EmptyList = styled('div')({
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
 })
