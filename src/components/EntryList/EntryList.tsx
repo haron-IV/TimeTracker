@@ -1,47 +1,31 @@
-import { useContext, useEffect, useState } from 'react'
-import { DB } from 'services'
-import { EntryListContext } from 'shared/utils'
-import styled from 'styled-components'
-import {
-  ENTRY_LIST_MARGIN_TOP,
-  ENTRY_LIST_PADDING_TOP,
-  APP_HEADER_HEIGHT,
-  TIME_ENTRY_SECTION_HEIGHT,
-  palette,
-} from '../../config'
+import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
+import { EntryListSection, List } from './EntryList.style'
+import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
 
-const db = new DB()
-
-const EntryListSection = styled('section')({
-  borderTop: `1px solid ${palette.divider}`,
-  width: '100%',
-  marginTop: ENTRY_LIST_MARGIN_TOP,
-  overflowY: 'auto',
-  height: `calc(100vh - ${APP_HEADER_HEIGHT + TIME_ENTRY_SECTION_HEIGHT}px)`,
-})
-
-const List = styled('ul')({
-  listStyleType: 'none',
-  margin: 0,
-  padding: `${ENTRY_LIST_PADDING_TOP}px 0 0 0`,
-})
-
 const EntryList = () => {
-  const ctx = useContext(EntryListContext)
-  const [timeEntryItems, setTimeEntryItems] = useState(db.getTimeEntries())
+  const { entriesFromDay, labels, targetDate, setTargetDate } = useEntryList()
+  const setDate = useChangeDate(setTargetDate, targetDate)
 
-  useEffect(() => {
-    if (!ctx?.updateEntryList) return
-    setTimeEntryItems(db.getTimeEntries())
-    ctx.setUpdateEntryList(false)
-  }, [ctx?.updateEntryList])
-
+  //TODO: refactorize this component
   return (
     <EntryListSection>
+      <div>
+        <b>Selected date:</b>
+        <div>
+          <button onClick={() => setDate(-1)}>
+            <BsArrowLeftCircle />
+          </button>
+          {/* FIXME: there is a bug with empty entry after changing the date */}
+          {targetDate}
+          <button onClick={() => setDate(1)}>
+            <BsArrowRightCircle />
+          </button>
+        </div>
+      </div>
       <List>
-        {timeEntryItems.map(item => (
-          <ListItem {...item} labels={db.getLabels()} />
+        {entriesFromDay.map(item => (
+          <ListItem {...item} labels={labels} />
         ))}
       </List>
     </EntryListSection>
