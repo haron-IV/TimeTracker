@@ -21,7 +21,6 @@ const EntryList = () => {
           <Button onClick={() => setDate(-1)} side="left">
             <BsArrowLeftCircle />
           </Button>
-          {/* FIXME: there is a bug with empty entry after changing the date */}
           <DateWrapper>{targetDate}</DateWrapper>
           <Button onClick={() => setDate(1)} side="right">
             <BsArrowRightCircle />
@@ -30,7 +29,7 @@ const EntryList = () => {
       </div>
       <List>
         {entriesFromDay.map(item => (
-          <ListItem {...item} labels={labels} />
+          <ListItem key={item.id} {...item} labels={labels} />
         ))}
       </List>
     </EntryListSection>

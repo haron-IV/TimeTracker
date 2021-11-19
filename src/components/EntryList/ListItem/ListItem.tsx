@@ -23,7 +23,7 @@ const ListItem = ({
 }: ListItemProps) => {
   return (
     <Item>
-      <EntryDescription>{timeEntryDescription}</EntryDescription>
+      <EntryDescription defaultValue={timeEntryDescription} />
       <Labels
         labels={labels}
         selectedLabels={getSelectedLabels(labels, selectedLabels)}
