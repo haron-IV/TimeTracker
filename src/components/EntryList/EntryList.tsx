@@ -1,48 +1,52 @@
-import { useContext, useEffect, useState } from 'react'
-import { DB } from 'services'
-import { EntryListContext } from 'shared/utils'
-import styled from 'styled-components'
+import { palette } from 'config'
 import {
-  ENTRY_LIST_MARGIN_TOP,
-  ENTRY_LIST_PADDING_TOP,
-  APP_HEADER_HEIGHT,
-  TIME_ENTRY_SECTION_HEIGHT,
-  palette,
-} from '../../config'
+  BsArrowLeftCircle,
+  BsArrowRightCircle,
+  BsExclamationOctagon,
+} from 'react-icons/bs'
+import {
+  Button,
+  ControlsWrapper,
+  DateField,
+  EmptyList,
+  EntryListSection,
+  List,
+} from './EntryList.style'
+import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
 
-const db = new DB()
-
-const EntryListSection = styled('section')({
-  borderTop: `1px solid ${palette.divider}`,
-  width: '100%',
-  marginTop: ENTRY_LIST_MARGIN_TOP,
-  overflowY: 'auto',
-  height: `calc(100vh - ${APP_HEADER_HEIGHT + TIME_ENTRY_SECTION_HEIGHT}px)`,
-})
-
-const List = styled('ul')({
-  listStyleType: 'none',
-  margin: 0,
-  padding: `${ENTRY_LIST_PADDING_TOP}px 0 0 0`,
-})
-
 const EntryList = () => {
-  const ctx = useContext(EntryListContext)
-  const [timeEntryItems, setTimeEntryItems] = useState(db.getTimeEntries())
-
-  useEffect(() => {
-    if (!ctx?.updateEntryList) return
-    setTimeEntryItems(db.getTimeEntries())
-    ctx.setUpdateEntryList(false)
-  }, [ctx?.updateEntryList])
+  const { entriesFromDay, labels, targetDate, setTargetDate } = useEntryList()
+  const setDate = useChangeDate(setTargetDate, targetDate)
+  const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTargetDate(e.target.value)
+  }
 
   return (
     <EntryListSection>
+      <div>
+        <b>Selected date:</b>
+        <ControlsWrapper>
+          <Button onClick={() => setDate(-1)} side="left">
+            <BsArrowLeftCircle />
+          </Button>
+          <DateField type="date" value={targetDate} onChange={onDateChange} />
+          {/* <DateWrapper>{targetDate}</DateWrapper> */}
+          <Button onClick={() => setDate(1)} side="right">
+            <BsArrowRightCircle />
+          </Button>
+        </ControlsWrapper>
+      </div>
       <List>
-        {timeEntryItems.map(item => (
-          <ListItem {...item} labels={db.getLabels()} />
+        {entriesFromDay.map(item => (
+          <ListItem key={item.id} {...item} labels={labels} />
         ))}
+        {entriesFromDay.length === 0 && (
+          <EmptyList>
+            <h1>No time entries</h1>
+            <BsExclamationOctagon size={100} color={palette.accent.accent} />
+          </EmptyList>
+        )}
       </List>
     </EntryListSection>
   )

@@ -17,7 +17,7 @@ class DBUtils {
     const dbString = JSON.stringify(db)
     localStorage.setItem(DB_NAME, dbString)
   }
-  getDate = () => {
+  static getDate = () => {
     const d = new Date()
     const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
     return date

@@ -10,4 +10,9 @@ export const typography = {
     medium: 400,
     bold: 700,
   },
+  fontSize: {
+    small: '1rem',
+    regular: '1.25rem',
+    mid: '1.5rem',
+  },
 }

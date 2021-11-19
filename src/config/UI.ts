@@ -1,4 +1,6 @@
 export const DEFAULT_BORDER_RADIUS = 3
+export const DEFAULT_BUTTON_PADDING_Y = 5
+export const DEFAULT_BUTTON_PADDING_X = 15
 
 export const APP_HEADER_HEIGHT = 65
 
@@ -24,3 +26,7 @@ export const ENTRY_LIST_ITEM_MARGIN = 15
 
 export const FOOTER_PADDING = 15
 export const FOOTER_HEIGHT = 50
+
+export const SPACING_SMALL = 5
+export const SPACING_REGULAR = 10
+export const SPACING_MID = 15
