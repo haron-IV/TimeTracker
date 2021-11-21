@@ -31,7 +31,6 @@ const EntryList = () => {
             <BsArrowLeftCircle />
           </Button>
           <DateField type="date" value={targetDate} onChange={onDateChange} />
-          {/* <DateWrapper>{targetDate}</DateWrapper> */}
           <Button onClick={() => setDate(1)} side="right">
             <BsArrowRightCircle />
           </Button>

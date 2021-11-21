@@ -1,4 +1,5 @@
 import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
+import { ErrorIndicator } from 'shared/components'
 import { LabelsContext } from 'shared/utils'
 import styled from 'styled-components'
 import {
@@ -35,7 +36,7 @@ const TimeEntrySection = () => {
   } = useFieldValues()
 
   const toggleLabel = useToggleLabel(selectedLabels, setSelectedLabels)
-  const onAddEntry = useOnAdd({
+  const { onEntryAdd, errors } = useOnAdd({
     timeEntryDescription,
     selectedLabels,
     entryTimeHours,
@@ -46,10 +47,15 @@ const TimeEntrySection = () => {
 
   return (
     <Section>
-      <EntryDescriptionField
-        value={timeEntryDescription}
-        onChange={setTimeEntryDescription}
-      />
+      <div>
+        <EntryDescriptionField
+          value={timeEntryDescription}
+          onChange={setTimeEntryDescription}
+        />
+        <ErrorIndicator error={errors?.timeEntryDescription}>
+          {errors?.timeEntryDescription}
+        </ErrorIndicator>
+      </div>
       <LabelsContext.Provider value={{ updateLabels, setUpdateLabels }}>
         <Labels
           labels={labels}
@@ -57,13 +63,18 @@ const TimeEntrySection = () => {
           onClick={toggleLabel}
         />
       </LabelsContext.Provider>
-      <EntryTimeField
-        hours={entryTimeHours}
-        minutes={entryTimeMinutes}
-        setHours={setEntryTimeHours}
-        setMinutes={setEntryTimeMinutes}
-      />
-      <AddEntryButton onClick={onAddEntry} />
+      <div>
+        <EntryTimeField
+          hours={entryTimeHours}
+          minutes={entryTimeMinutes}
+          setHours={setEntryTimeHours}
+          setMinutes={setEntryTimeMinutes}
+        />
+        <ErrorIndicator error={errors?.timeEntry}>
+          {errors?.timeEntry}
+        </ErrorIndicator>
+      </div>
+      <AddEntryButton onClick={onEntryAdd} />
     </Section>
   )
 }

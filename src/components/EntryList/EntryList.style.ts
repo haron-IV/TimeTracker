@@ -12,7 +12,7 @@ import {
   transition,
   typography,
 } from 'config'
-import styled, { keyframes, css } from 'styled-components'
+import styled from 'styled-components'
 
 export const EntryListSection = styled('section')({
   borderTop: `1px solid ${palette.divider}`,

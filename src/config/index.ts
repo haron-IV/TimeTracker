@@ -1,6 +1,7 @@
 export { palette } from './palette'
 export { typography } from './typography'
-export { transition } from './tansition'
+export { transition } from './transition'
+export { validation } from './validation'
 export * from './config'
 export * from './DBSchema'
 export * from './UI'

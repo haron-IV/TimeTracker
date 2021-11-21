@@ -1,4 +1,5 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { validation } from 'config'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { DB } from 'services'
 import { ID, Label } from 'shared/types'
 import { EntryListContext } from 'shared/utils'
@@ -49,12 +50,56 @@ interface UseOnAddProps {
   entryTimeHours: number
   entryTimeMinutes: number
 }
+
+interface Errors {
+  timeEntryDescription?: string
+  timeEntry?: string
+}
+
 export const useOnAdd = (props: UseOnAddProps) => {
   const ctx = useContext(EntryListContext)
+  const [errors, setErrors] = useState<Errors>({
+    timeEntryDescription: undefined,
+    timeEntry: undefined,
+  })
 
-  return () => {
-    ctx?.setUpdateEntryList(true)
-    db.addTimeEntry(props)
+  const validate = () => {
+    if (!props.timeEntryDescription)
+      setErrors(err => ({
+        ...err,
+        timeEntryDescription: validation.emptyTimeEntryDescription,
+      }))
+    else
+      setErrors(err => ({
+        ...err,
+        timeEntryDescription: undefined,
+      }))
+    if (!props.entryTimeHours && !props.entryTimeMinutes)
+      setErrors(err => ({
+        ...err,
+        timeEntry: validation.emptyEntryTime,
+      }))
+    else
+      setErrors(err => ({
+        ...err,
+        timeEntry: undefined,
+      }))
+  }
+
+  const initial = useRef(true)
+
+  useEffect(() => {
+    !initial.current && validate()
+    initial.current = false
+  }, [props.entryTimeHours, props.entryTimeMinutes, props.timeEntryDescription])
+
+  return {
+    onEntryAdd: () => {
+      if (errors && (errors.timeEntry || errors.timeEntryDescription)) return
+      ctx?.setUpdateEntryList(true)
+      db.addTimeEntry(props)
+    },
+    errors: errors,
   }
 }
 
