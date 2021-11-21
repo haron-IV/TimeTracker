@@ -1,6 +1,4 @@
 import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
-import { error } from 'console'
-import { useEffect } from 'react'
 import { ErrorIndicator } from 'shared/components'
 import { LabelsContext } from 'shared/utils'
 import styled from 'styled-components'
