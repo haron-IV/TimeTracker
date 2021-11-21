@@ -63,7 +63,6 @@ export const useOnAdd = (props: UseOnAddProps) => {
     timeEntry: undefined,
   })
 
-  //TODO: refactorize it -- do it better it doesn't work correctly
   const validate = () => {
     if (!props.timeEntryDescription)
       setErrors(err => ({
@@ -86,20 +85,21 @@ export const useOnAdd = (props: UseOnAddProps) => {
         timeEntry: undefined,
       }))
   }
+
   const initial = useRef(true)
+
   useEffect(() => {
     !initial.current && validate()
     initial.current = false
-  }, [props.timeEntryDescription, props.entryTimeHours, props.entryTimeMinutes])
+  }, [props.entryTimeHours, props.entryTimeMinutes, props.timeEntryDescription])
 
   return {
     onEntryAdd: () => {
-      validate()
       if (errors && (errors.timeEntry || errors.timeEntryDescription)) return
       ctx?.setUpdateEntryList(true)
       db.addTimeEntry(props)
     },
-    errors,
+    errors: errors,
   }
 }
 
