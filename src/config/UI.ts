@@ -30,3 +30,4 @@ export const FOOTER_HEIGHT = 50
 export const SPACING_SMALL = 5
 export const SPACING_REGULAR = 10
 export const SPACING_MID = 15
+export const SPACING_BIG = 25

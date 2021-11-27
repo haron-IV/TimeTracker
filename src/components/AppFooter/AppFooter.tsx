@@ -1,16 +1,8 @@
+import { BsGear } from 'react-icons/bs'
+import { Modal } from 'shared/components'
 import { SpaceInfo } from 'shared/types'
 import { Footer } from './AppFooter.style'
-
-interface SpaceInfoItemProps {
-  kb: string
-  percentage: string
-}
-
-const SpaceInfoItem = ({ kb, percentage }: SpaceInfoItemProps) => (
-  <span>
-    {kb} / {percentage}
-  </span>
-)
+import MemoryUse from './MemoryUse'
 
 interface AppFooterProps {
   spaceInfo: SpaceInfo
@@ -19,9 +11,22 @@ interface AppFooterProps {
 const AppFooter = ({ spaceInfo: { used } }: AppFooterProps) => {
   return (
     <Footer>
-      <div>
-        Memory used: <SpaceInfoItem kb={used.kb} percentage={used.percentage} />
-      </div>
+      <Modal title="Settings" footer={<div>elo</div>} show>
+        <div>Coś tam</div>
+        <button>elo</button>
+      </Modal>
+      <button
+        style={{
+          width: 30,
+          height: 30,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <BsGear />
+      </button>
+      <MemoryUse {...used} />
     </Footer>
   )
 }

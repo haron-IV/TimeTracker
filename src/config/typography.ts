@@ -14,5 +14,6 @@ export const typography = {
     small: '1rem',
     regular: '1.25rem',
     mid: '1.5rem',
+    big: '1.75rem',
   },
 }
