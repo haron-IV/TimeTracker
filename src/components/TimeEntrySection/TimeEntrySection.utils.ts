@@ -56,12 +56,14 @@ interface Errors {
   timeEntry?: string
 }
 
+const initialErrorsState = {
+  timeEntryDescription: undefined,
+  timeEntry: undefined,
+}
+
 export const useOnAdd = (props: UseOnAddProps) => {
   const ctx = useContext(EntryListContext)
-  const [errors, setErrors] = useState<Errors>({
-    timeEntryDescription: undefined,
-    timeEntry: undefined,
-  })
+  const [errors, setErrors] = useState<Errors>(initialErrorsState)
 
   const validate = () => {
     if (!props.timeEntryDescription)
@@ -98,6 +100,7 @@ export const useOnAdd = (props: UseOnAddProps) => {
       if (errors && (errors.timeEntry || errors.timeEntryDescription)) return
       ctx?.setUpdateEntryList(true)
       db.addTimeEntry(props)
+      setErrors(initialErrorsState)
     },
     errors: errors,
   }
