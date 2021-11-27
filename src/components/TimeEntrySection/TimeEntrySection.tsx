@@ -1,7 +1,8 @@
+import styled from 'styled-components'
+import { useEffect } from 'react'
 import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
 import { ErrorIndicator } from 'shared/components'
 import { LabelsContext } from 'shared/utils'
-import styled from 'styled-components'
 import {
   AddEntryButton,
   EntryDescriptionField,
@@ -21,7 +22,11 @@ const Section = styled('section')({
   height: TIME_ENTRY_SECTION_HEIGHT,
 })
 
-const TimeEntrySection = () => {
+interface TimeEntrySectionProps {
+  updateEntryList: boolean
+}
+
+const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
   const {
     timeEntryDescription,
     setTimeEntryDescription,
@@ -44,6 +49,20 @@ const TimeEntrySection = () => {
   })
 
   const { updateLabels, setUpdateLabels } = useUpdateLabels(setLabels)
+
+  useEffect(() => {
+    if (!updateEntryList) return
+    setTimeEntryDescription('')
+    setSelectedLabels([])
+    setEntryTimeMinutes(0)
+    setEntryTimeHours(0)
+  }, [
+    updateEntryList,
+    setTimeEntryDescription,
+    setSelectedLabels,
+    setEntryTimeMinutes,
+    setEntryTimeHours,
+  ])
 
   return (
     <Section>

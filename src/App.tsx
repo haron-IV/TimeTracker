@@ -37,7 +37,7 @@ const App = () => {
         <EntryListContext.Provider
           value={{ updateEntryList, setUpdateEntryList }}
         >
-          <TimeEntrySection />
+          <TimeEntrySection updateEntryList={updateEntryList} />
           <EntryList />
         </EntryListContext.Provider>
       </Container>

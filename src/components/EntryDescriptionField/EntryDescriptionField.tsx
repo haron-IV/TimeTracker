@@ -28,7 +28,7 @@ const EntryDescriptionField = ({
 }: EntryDescriptionFieldProps) => (
   <TextArea
     onChange={(e: ChangeEvent<string>) => onChange(e.target.value)}
-    defaultValue={value}
+    value={value}
   />
 )
 
