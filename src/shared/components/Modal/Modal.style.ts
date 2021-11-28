@@ -20,14 +20,20 @@ export const ModalWrapper = styled('div')({
   alignItems: 'center',
 })
 
-export const ModalPaper = styled('div')({
-  position: 'relative',
-  width: 400,
-  height: 650,
-  backgroundColor: palette.background.paper,
-  borderRadius: DEFAULT_BORDER_RADIUS,
-  padding: SPACING_REGULAR,
-})
+interface ModalPaperProps {
+  width?: number
+  height?: number
+}
+export const ModalPaper = styled('div')<ModalPaperProps>(
+  ({ width, height }) => ({
+    position: 'relative',
+    width: width || '40%',
+    height: height || '65%',
+    backgroundColor: palette.background.paper,
+    borderRadius: DEFAULT_BORDER_RADIUS,
+    padding: SPACING_REGULAR,
+  })
+)
 
 export const ModalTitle = styled('header')({
   textAlign: 'center',

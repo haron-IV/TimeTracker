@@ -11,6 +11,8 @@ interface ModalProps {
   title?: string
   footer?: ReactElement
   show: boolean
+  width?: number
+  height?: number
 }
 
 const Modal = ({
@@ -18,6 +20,8 @@ const Modal = ({
   children,
   footer,
   show,
+  width,
+  height,
 }: PropsWithChildren<ModalProps>) =>
   show ? (
     <ModalWrapper>
