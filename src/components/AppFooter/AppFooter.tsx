@@ -2,7 +2,7 @@ import { BsGear } from 'react-icons/bs'
 import { Modal } from 'shared/components'
 import { SpaceInfo } from 'shared/types'
 import { useModal } from 'shared/utils/hooks'
-import { Footer } from './AppFooter.style'
+import { Footer, SettingsButton } from './AppFooter.style'
 import MemoryUse from './MemoryUse'
 
 interface AppFooterProps {
@@ -23,18 +23,9 @@ const AppFooter = ({ spaceInfo: { used } }: AppFooterProps) => {
         <div>Coś tam</div>
         <button>elo</button>
       </Modal>
-      <button
-        onClick={toggleModal}
-        style={{
-          width: 30,
-          height: 30,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <SettingsButton onClick={toggleModal}>
         <BsGear />
-      </button>
+      </SettingsButton>
       <MemoryUse {...used} />
     </Footer>
   )

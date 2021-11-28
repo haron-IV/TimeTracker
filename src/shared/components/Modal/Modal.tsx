@@ -1,9 +1,4 @@
-import {
-  MouseEvent,
-  MouseEventHandler,
-  PropsWithChildren,
-  ReactElement,
-} from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
 import {
   ModalContent,
   ModalFooter,
