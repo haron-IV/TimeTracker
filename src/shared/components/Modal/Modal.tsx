@@ -1,4 +1,9 @@
-import { PropsWithChildren, ReactElement } from 'react'
+import {
+  MouseEvent,
+  MouseEventHandler,
+  PropsWithChildren,
+  ReactElement,
+} from 'react'
 import {
   ModalContent,
   ModalFooter,
@@ -10,7 +15,8 @@ import {
 interface ModalProps {
   title?: string
   footer?: ReactElement
-  show: boolean
+  open: boolean
+  toggleModal: () => void
   width?: number
   height?: number
 }
@@ -19,13 +25,19 @@ const Modal = ({
   title,
   children,
   footer,
-  show,
+  open,
+  toggleModal,
   width,
   height,
 }: PropsWithChildren<ModalProps>) =>
-  show ? (
-    <ModalWrapper>
-      <ModalPaper>
+  open ? (
+    <ModalWrapper onClick={toggleModal}>
+      <ModalPaper
+        {...{ width, height }}
+        onClick={e => {
+          e.stopPropagation()
+        }}
+      >
         {title && (
           <ModalTitle>
             <h3>{title}</h3>
