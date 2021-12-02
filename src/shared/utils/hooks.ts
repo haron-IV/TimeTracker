@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-export const useModal = () => {
+export const useToggle = () => {
   const [open, setOpen] = useState(false)
-  const toggleModal = () => setOpen(open => !open)
+  const toggleOpen = () => setOpen(open => !open)
 
-  return { open, toggleModal }
+  return { open, toggleOpen }
 }
