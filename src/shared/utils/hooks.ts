@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
-export const useToggle = () => {
-  const [open, setOpen] = useState(false)
+type UseToggleReturnType = [boolean, () => void]
+
+export const useToggle = (initialValue?: boolean): UseToggleReturnType => {
+  const [open, setOpen] = useState(!!initialValue)
   const toggleOpen = () => setOpen(open => !open)
 
-  return { open, toggleOpen }
+  return [open, toggleOpen]
 }

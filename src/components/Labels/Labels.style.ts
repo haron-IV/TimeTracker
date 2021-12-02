@@ -9,16 +9,8 @@ import {
   transition,
   typography,
 } from 'config'
-import { MouseEventHandler } from 'react'
-import { ID } from 'shared/types'
+import { LabelProps } from 'shared/types'
 import styled from 'styled-components'
-
-export interface LabelProps {
-  labelName?: string
-  onClick: MouseEventHandler<HTMLButtonElement> & ((id: string) => void)
-  id?: ID
-  active?: boolean
-}
 
 export const StyledLabel = styled('button')<LabelProps>(({ active }) => ({
   padding: LABEL_PADDING,

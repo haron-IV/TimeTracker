@@ -12,7 +12,7 @@ interface CollapseProps {
 }
 
 const Collapse = ({ children, title }: PropsWithChildren<CollapseProps>) => {
-  const { open, toggleOpen } = useToggle()
+  const [open, toggleOpen] = useToggle()
 
   return (
     <CollapseWrapper>
