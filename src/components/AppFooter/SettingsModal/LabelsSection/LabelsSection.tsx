@@ -1,45 +1,29 @@
-import { LabelItem } from 'components/Labels/AddNewLabel'
-import {
-  LABEL_HEIGHT,
-  LABEL_MARGIN,
-  LABEL_PADDING,
-  LABEL_WIDTH,
-  SPACING_REGULAR,
-} from 'config'
+import { LabelItem } from 'components/Labels/AddNewLabel' //TODO: move it to shared
+import { useState } from 'react'
 import { BsTrash } from 'react-icons/bs'
 import { DB } from 'services'
-import { LabelProps } from 'shared/types'
+import { Label, LabelProps } from 'shared/types'
 import { useToggle } from 'shared/utils/hooks'
-import styled from 'styled-components'
+import { DeleteButton, LabelsWrapper } from './LabelsSection.style'
 
 const db = new DB()
 
-//TODO:
-// Refactorize
-// Add logic to remove labels
-// Add are you sure to delete
+type LabelPropsWithDelete = Omit<LabelProps, 'onClick'> & {
+  setLabels: (labels: Label[]) => void
+}
 
-const LabelsWrapper = styled('section')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  flexWrap: 'wrap',
-  gap: SPACING_REGULAR,
-})
-
-const DeleteButton = styled('button')({
-  padding: LABEL_PADDING,
-  height: LABEL_HEIGHT,
-  minWidth: LABEL_WIDTH,
-  margin: `0 ${LABEL_MARGIN}px`,
-})
-
-const Label = ({ labelName, id }: Omit<LabelProps, 'onClick'>) => {
+const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
   const [clicked, toggleClicked] = useToggle()
+
+  const deleteLabel = () => {
+    id && db.deleteLabel(id)
+    setLabels(db.getLabels())
+  }
 
   return (
     <>
       {clicked ? (
-        <DeleteButton>
+        <DeleteButton onClick={deleteLabel}>
           <BsTrash />
         </DeleteButton>
       ) : (
@@ -50,12 +34,12 @@ const Label = ({ labelName, id }: Omit<LabelProps, 'onClick'>) => {
 }
 
 const LabelsSection = () => {
-  const labels = db.getLabels()
+  const [labels, setLabels] = useState(db.getLabels())
 
   return (
     <LabelsWrapper>
       {labels.map(({ name, id }) => (
-        <Label labelName={name} id={id} key={id} />
+        <LabelComp labelName={name} id={id} key={id} setLabels={setLabels} />
       ))}
     </LabelsWrapper>
   )
