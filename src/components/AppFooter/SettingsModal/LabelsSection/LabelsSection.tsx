@@ -1,13 +1,14 @@
-import { LabelItem } from 'components/Labels/AddNewLabel' //TODO: move it to shared
 import { SPACING_MID } from 'config'
-import { MouseEventHandler, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { BsArrowReturnLeft, BsPencil, BsTrash } from 'react-icons/bs'
 import { DB } from 'services'
 import { Label, LabelProps } from 'shared/types'
 import { useToggle } from 'shared/utils/hooks'
+import { LabelItem } from '../../../Labels/AddNewLabel'
 import {
   ActionButton,
   ActionButtonWrapper,
+  LabelItemWrapper,
   LabelsWrapper,
 } from './LabelsSection.style'
 
@@ -20,28 +21,19 @@ type LabelPropsWithDelete = Omit<LabelProps, 'onClick'> & {
 const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
   const [clicked, toggleClicked] = useToggle()
   const labelRef = useRef<HTMLDivElement>(null)
-
+  const width = labelRef.current?.offsetWidth
+  const height = labelRef.current?.offsetHeight
   const deleteLabel = () => {
     id && db.deleteLabel(id)
     setLabels(db.getLabels())
   }
 
-  //TODO: refactorize
-  // add renaming for tags
-
   return (
     <>
       {clicked && (
         <ActionButtonWrapper
-          style={{
-            maxWidth:
-              labelRef.current?.offsetWidth &&
-              labelRef.current?.offsetWidth - SPACING_MID,
-            width:
-              labelRef.current?.offsetWidth &&
-              labelRef.current?.offsetWidth - SPACING_MID,
-            height: labelRef.current?.offsetHeight,
-          }}
+          width={width && width - SPACING_MID}
+          height={height}
         >
           <ActionButton onClick={deleteLabel}>
             <BsTrash />
@@ -54,16 +46,9 @@ const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
           </ActionButton>
         </ActionButtonWrapper>
       )}
-      <div
-        ref={labelRef}
-        style={{
-          opacity: clicked ? 0 : 1,
-          position: clicked ? 'absolute' : 'static',
-          zIndex: clicked ? -999 : 'unset',
-        }}
-      >
+      <LabelItemWrapper clicked={clicked}>
         <LabelItem {...{ labelName, id }} key={id} onClick={toggleClicked} />
-      </div>
+      </LabelItemWrapper>
     </>
   )
 }

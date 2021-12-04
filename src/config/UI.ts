@@ -31,3 +31,7 @@ export const ENTRY_LIST_ITEM_MARGIN = SPACING_MID
 
 export const FOOTER_PADDING = SPACING_MID
 export const FOOTER_HEIGHT = 50
+
+export const Z_INDEX_MIN = 0
+export const Z_INDEX_REGULAR = 100
+export const Z_INDEX_MID = 200

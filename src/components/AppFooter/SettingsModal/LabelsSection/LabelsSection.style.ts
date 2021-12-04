@@ -1,4 +1,9 @@
-import { DEFAULT_BORDER_RADIUS, palette, SPACING_REGULAR } from 'config'
+import {
+  DEFAULT_BORDER_RADIUS,
+  palette,
+  SPACING_REGULAR,
+  Z_INDEX_REGULAR,
+} from 'config'
 import styled from 'styled-components'
 
 export const LabelsWrapper = styled('section')({
@@ -20,10 +25,27 @@ export const ActionButton = styled('button')({
   },
 })
 
-export const ActionButtonWrapper = styled('div')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: 0,
-  border: '1px solid',
-  borderRadius: DEFAULT_BORDER_RADIUS,
-})
+interface ActionButtonWrapperProps {
+  width?: number
+  height?: number
+}
+export const ActionButtonWrapper = styled('div')<ActionButtonWrapperProps>(
+  ({ width, height }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: 0,
+    border: '1px solid',
+    borderRadius: DEFAULT_BORDER_RADIUS,
+    maxWidth: width,
+    width,
+    height,
+  })
+)
+
+export const LabelItemWrapper = styled('div')<{ clicked: boolean }>(
+  ({ clicked }) => ({
+    opacity: clicked ? 0 : 1,
+    position: clicked ? 'absolute' : 'static',
+    zIndex: clicked ? -Z_INDEX_REGULAR : 'unset',
+  })
+)
