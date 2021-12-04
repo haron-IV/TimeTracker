@@ -1,6 +1,12 @@
 import { SPACING_MID } from 'config'
 import { useRef, useState } from 'react'
-import { BsArrowReturnLeft, BsPencil, BsTrash } from 'react-icons/bs'
+import {
+  BsArrowReturnLeft,
+  BsCheck2,
+  BsPencil,
+  BsTrash,
+  BsX,
+} from 'react-icons/bs'
 import { DB } from 'services'
 import { Label, LabelProps } from 'shared/types'
 import { useToggle } from 'shared/utils/hooks'
@@ -8,6 +14,7 @@ import { LabelItem } from '../../../Labels/AddNewLabel'
 import {
   ActionButton,
   ActionButtonWrapper,
+  EditLabelNameWrapper,
   LabelItemWrapper,
   LabelsWrapper,
 } from './LabelsSection.style'
@@ -20,25 +27,27 @@ type LabelPropsWithDelete = Omit<LabelProps, 'onClick'> & {
 
 const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
   const [clicked, toggleClicked] = useToggle()
-  const labelRef = useRef<HTMLDivElement>(null)
-  const width = labelRef.current?.offsetWidth
-  const height = labelRef.current?.offsetHeight
+  const [editClicked, toggleEditClicked] = useToggle()
+  const [newLabelName, setNewLabelName] = useState(labelName)
   const deleteLabel = () => {
     id && db.deleteLabel(id)
     setLabels(db.getLabels())
   }
+  const updateLabel = () => {
+    newLabelName && id && db.editLabel(newLabelName, id)
+    setLabels(db.getLabels())
+    toggleClicked()
+    toggleEditClicked()
+  }
 
   return (
     <>
-      {clicked && (
-        <ActionButtonWrapper
-          width={width && width - SPACING_MID}
-          height={height}
-        >
+      {clicked && !editClicked && (
+        <ActionButtonWrapper>
           <ActionButton onClick={deleteLabel}>
             <BsTrash />
           </ActionButton>
-          <ActionButton>
+          <ActionButton onClick={toggleEditClicked}>
             <BsPencil />
           </ActionButton>
           <ActionButton onClick={toggleClicked}>
@@ -46,6 +55,24 @@ const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
           </ActionButton>
         </ActionButtonWrapper>
       )}
+
+      {editClicked && (
+        <EditLabelNameWrapper>
+          <input
+            type="text"
+            onChange={e => setNewLabelName(e.target.value)}
+            value={newLabelName}
+          />
+
+          <ActionButton onClick={updateLabel}>
+            <BsCheck2 />
+          </ActionButton>
+          <ActionButton onClick={toggleEditClicked}>
+            <BsX />
+          </ActionButton>
+        </EditLabelNameWrapper>
+      )}
+
       <LabelItemWrapper clicked={clicked}>
         <LabelItem {...{ labelName, id }} key={id} onClick={toggleClicked} />
       </LabelItemWrapper>

@@ -50,6 +50,15 @@ class DB extends DBUtils {
     const updatedDB = { ...db, cfg: { ...db.cfg, labels: filteredLabels } }
     this.saveDB(updatedDB)
   }
+
+  editLabel = (newName: string, id: ID) => {
+    const db = this.getDB()
+    const editedLabels = db.cfg.labels.map(label =>
+      label.id === id ? { id, name: newName } : label
+    )
+    const updatedDB = { ...db, cfg: { ...db.cfg, labels: editedLabels } }
+    this.saveDB(updatedDB)
+  }
 }
 
 export default DB

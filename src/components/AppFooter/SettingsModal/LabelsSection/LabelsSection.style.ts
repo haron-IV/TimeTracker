@@ -1,5 +1,8 @@
 import {
   DEFAULT_BORDER_RADIUS,
+  LABEL_HEIGHT,
+  LABEL_MARGIN,
+  LABEL_WIDTH,
   palette,
   SPACING_REGULAR,
   Z_INDEX_REGULAR,
@@ -25,22 +28,16 @@ export const ActionButton = styled('button')({
   },
 })
 
-interface ActionButtonWrapperProps {
-  width?: number
-  height?: number
-}
-export const ActionButtonWrapper = styled('div')<ActionButtonWrapperProps>(
-  ({ width, height }) => ({
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: 0,
-    border: '1px solid',
-    borderRadius: DEFAULT_BORDER_RADIUS,
-    maxWidth: width,
-    width,
-    height,
-  })
-)
+export const ActionButtonWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: 0,
+  border: '1px solid',
+  borderRadius: DEFAULT_BORDER_RADIUS,
+  margin: `0 ${LABEL_MARGIN}px`,
+  width: LABEL_WIDTH,
+  height: LABEL_HEIGHT,
+})
 
 export const LabelItemWrapper = styled('div')<{ clicked: boolean }>(
   ({ clicked }) => ({
@@ -49,3 +46,15 @@ export const LabelItemWrapper = styled('div')<{ clicked: boolean }>(
     zIndex: clicked ? -Z_INDEX_REGULAR : 'unset',
   })
 )
+
+export const EditLabelNameWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: 0,
+  borderRadius: DEFAULT_BORDER_RADIUS,
+  width: LABEL_WIDTH,
+  maxWidth: LABEL_WIDTH,
+  height: LABEL_HEIGHT,
+})
+
+export const EditLabelInput = styled('input')({})
