@@ -56,5 +56,3 @@ export const EditLabelNameWrapper = styled('div')({
   maxWidth: LABEL_WIDTH,
   height: LABEL_HEIGHT,
 })
-
-export const EditLabelInput = styled('input')({})

@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { DB } from 'services'
-import { TimeEntry } from 'services/DB'
-import DBUtils from 'services/DB/DBUtils'
+import { DB, TimeEntry, DBUtils } from 'services'
 import { addLeadingZero, EntryListContext } from 'shared/utils'
 
 const db = new DB()

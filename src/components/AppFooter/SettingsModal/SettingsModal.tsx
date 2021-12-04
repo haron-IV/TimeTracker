@@ -1,5 +1,4 @@
-import { Modal } from 'shared/components'
-import Collapse from 'shared/components/Collapse/Collapse'
+import { Modal, Collapse } from 'shared/components'
 import LabelsSection from './LabelsSection'
 
 interface SettingsModalProps {
@@ -8,12 +7,7 @@ interface SettingsModalProps {
 }
 
 const SettingsModal = ({ open, toggleOpen }: SettingsModalProps) => (
-  <Modal
-    title="Settings"
-    footer={<div>elo</div>}
-    open={open}
-    toggleModal={toggleOpen}
-  >
+  <Modal title="Settings" open={open} toggleModal={toggleOpen}>
     <Collapse title="Labels">
       <LabelsSection />
     </Collapse>

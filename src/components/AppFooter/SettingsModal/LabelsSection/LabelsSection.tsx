@@ -1,5 +1,4 @@
-import { SPACING_MID } from 'config'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   BsArrowReturnLeft,
   BsCheck2,
@@ -24,6 +23,8 @@ const db = new DB()
 type LabelPropsWithDelete = Omit<LabelProps, 'onClick'> & {
   setLabels: (labels: Label[]) => void
 }
+
+//TODO: this component could be used as global label component
 
 const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
   const [clicked, toggleClicked] = useToggle()

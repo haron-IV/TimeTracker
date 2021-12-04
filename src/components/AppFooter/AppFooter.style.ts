@@ -1,4 +1,4 @@
-import { FOOTER_HEIGHT, FOOTER_PADDING, palette } from 'config'
+import { FOOTER_HEIGHT, FOOTER_PADDING, palette, SPACING_REGULAR } from 'config'
 import styled from 'styled-components'
 
 export const Footer = styled('footer')({
@@ -13,7 +13,7 @@ export const Footer = styled('footer')({
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',
-  gap: 10,
+  gap: SPACING_REGULAR,
 })
 
 export const SettingsButton = styled('button')({
