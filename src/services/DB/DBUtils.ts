@@ -1,12 +1,8 @@
 import { SpaceInfo } from 'shared/types'
-import { DB_NAME } from '../../config'
-import { DB_SCHEMA, DBSchema } from '../../config'
+import { addLeadingZero, toPercentage } from 'shared/utils'
+import { DB_SCHEMA, DBSchema, DB_NAME } from '../../config'
 
 const DB_AVAILABILITY = 5120
-
-//TODO: move to utils
-const toPercentage = (value: number, from: number) =>
-  Number(((value / from) * 100).toFixed(2))
 
 class DBUtils {
   DBExist = () => !!localStorage.getItem(DB_NAME)
@@ -17,10 +13,15 @@ class DBUtils {
     const dbString = JSON.stringify(db)
     localStorage.setItem(DB_NAME, dbString)
   }
-  static getDate = () => {
-    const d = new Date()
-    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
-    return date
+  static getDate = (date?: string) => {
+    const d = date ? new Date(date) : new Date()
+    const year = d.getFullYear()
+    const month = d.getMonth() + 1
+    const day = d.getDate()
+    const dateString = `${year}-${addLeadingZero(month)}-${addLeadingZero(day)}`
+    const dateObj = { year, month, day }
+
+    return { dateString, dateObj }
   }
 
   getDbSpace = (): SpaceInfo => {

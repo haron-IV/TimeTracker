@@ -1,27 +1,24 @@
+import { BsGear } from 'react-icons/bs'
 import { SpaceInfo } from 'shared/types'
-import { Footer } from './AppFooter.style'
-
-interface SpaceInfoItemProps {
-  kb: string
-  percentage: string
-}
-
-const SpaceInfoItem = ({ kb, percentage }: SpaceInfoItemProps) => (
-  <span>
-    {kb} / {percentage}
-  </span>
-)
+import { useToggle } from 'shared/utils'
+import { Footer, SettingsButton } from './AppFooter.style'
+import MemoryUse from './MemoryUse'
+import SettingsModal from './SettingsModal'
 
 interface AppFooterProps {
   spaceInfo: SpaceInfo
 }
 
 const AppFooter = ({ spaceInfo: { used } }: AppFooterProps) => {
+  const [open, toggleOpen] = useToggle()
+
   return (
     <Footer>
-      <div>
-        Memory used: <SpaceInfoItem kb={used.kb} percentage={used.percentage} />
-      </div>
+      <SettingsModal {...{ open, toggleOpen }} />
+      <SettingsButton onClick={toggleOpen}>
+        <BsGear />
+      </SettingsButton>
+      <MemoryUse {...used} />
     </Footer>
   )
 }

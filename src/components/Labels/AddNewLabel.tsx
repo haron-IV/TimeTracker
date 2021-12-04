@@ -1,7 +1,8 @@
 import { PropsWithChildren, useState } from 'react'
 import { BsFillTrashFill, BsPlus } from 'react-icons/bs'
 import { DB } from 'services'
-import { LabelProps, StyledLabel } from './Labels.style'
+import { LabelProps } from 'shared/types'
+import { StyledLabel } from './Labels.style'
 
 const db = new DB()
 
