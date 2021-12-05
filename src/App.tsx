@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { DB } from 'services'
-import { EntryListContext } from 'shared/utils'
+import { EntryListContext, LabelsContext } from 'shared/utils'
 import styled, { createGlobalStyle } from 'styled-components'
 import { AppFooter, AppHeader, EntryList, TimeEntrySection } from './components'
 import { palette } from './config'
@@ -23,25 +23,30 @@ const GlobalStyle = createGlobalStyle({
   },
   '*': {
     boxSizing: 'border-box',
+    padding: 0,
+    margin: 0,
   },
 })
 
 const App = () => {
   const [updateEntryList, setUpdateEntryList] = useState(false)
+  const [updateLabels, setUpdateLabels] = useState(false)
 
   return (
     <AppWrapper>
-      <GlobalStyle />
-      <AppHeader />
-      <Container>
-        <EntryListContext.Provider
-          value={{ updateEntryList, setUpdateEntryList }}
-        >
-          <TimeEntrySection updateEntryList={updateEntryList} />
-          <EntryList />
-        </EntryListContext.Provider>
-      </Container>
-      <AppFooter spaceInfo={spaceInfo} />
+      <EntryListContext.Provider
+        value={{ updateEntryList, setUpdateEntryList }}
+      >
+        <LabelsContext.Provider value={{ updateLabels, setUpdateLabels }}>
+          <GlobalStyle />
+          <AppHeader />
+          <Container>
+            <TimeEntrySection updateEntryList={updateEntryList} />
+            <EntryList />
+          </Container>
+          <AppFooter spaceInfo={spaceInfo} />
+        </LabelsContext.Provider>
+      </EntryListContext.Provider>
     </AppWrapper>
   )
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
 import { ErrorIndicator } from 'shared/components'
 import { LabelsContext } from 'shared/utils'
@@ -15,6 +15,9 @@ import {
   useToggleLabel,
   useUpdateLabels,
 } from './TimeEntrySection.utils'
+import { DB } from 'services'
+
+const db = new DB()
 
 const Section = styled('section')({
   display: 'flex',
@@ -30,8 +33,6 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
   const {
     timeEntryDescription,
     setTimeEntryDescription,
-    labels,
-    setLabels,
     selectedLabels,
     setSelectedLabels,
     entryTimeHours,
@@ -48,8 +49,6 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
     entryTimeMinutes,
   })
 
-  const { updateLabels, setUpdateLabels } = useUpdateLabels(setLabels)
-
   useEffect(() => {
     if (!updateEntryList) return
     setTimeEntryDescription('')
@@ -63,6 +62,8 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
     setEntryTimeMinutes,
     setEntryTimeHours,
   ])
+  const [labels, setLabels] = useState(db.getLabels())
+  useUpdateLabels(setLabels)
 
   return (
     <Section>
@@ -75,13 +76,13 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
           {errors?.timeEntryDescription}
         </ErrorIndicator>
       </div>
-      <LabelsContext.Provider value={{ updateLabels, setUpdateLabels }}>
-        <Labels
-          labels={labels}
-          selectedLabels={selectedLabels}
-          onClick={toggleLabel}
-        />
-      </LabelsContext.Provider>
+
+      <Labels
+        labels={labels}
+        selectedLabels={selectedLabels}
+        onClick={toggleLabel}
+      />
+
       <div>
         <EntryTimeField
           hours={entryTimeHours}
