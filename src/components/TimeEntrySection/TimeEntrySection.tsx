@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
 import { ErrorIndicator } from 'shared/components'
-import { LabelsContext } from 'shared/utils'
 import {
   AddEntryButton,
   EntryDescriptionField,

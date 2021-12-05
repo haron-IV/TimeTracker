@@ -4,6 +4,7 @@ import {
   ENTRY_LIST_ITEM_MARGIN,
   ENTRY_LIST_ITEM_PADDING,
   palette,
+  SPACING_SMALL,
 } from 'config'
 import styled from 'styled-components'
 
@@ -36,4 +37,13 @@ export const ActionsWrapper = styled('div')({
 export const Button = styled('div')({
   height: '50%',
   padding: '5px 10px',
+  cursor: 'pointer',
+  borderRadius: DEFAULT_BORDER_RADIUS,
+  marginTop: SPACING_SMALL,
+  backgroundColor: palette.primary.light,
+  boxShadow: palette.shadows.box0,
+  '&:hover': {
+    backgroundColor: palette.primary.primary,
+    boxShadow: palette.shadows.box1,
+  },
 })

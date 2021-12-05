@@ -27,6 +27,13 @@ class DB extends DBUtils {
     return timeEntries
   }
 
+  deleteTimeEntry = (id: ID) => {
+    const db = this.getDB()
+    const filteredEntries = db.timeEntries.filter(entry => entry.id !== id)
+    const updatedDB = { ...db, timeEntries: filteredEntries }
+    this.saveDB(updatedDB)
+  }
+
   getLabels = () => {
     const {
       cfg: { labels },
