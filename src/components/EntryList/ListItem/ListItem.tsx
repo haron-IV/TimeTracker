@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
-import { TimeEntry } from 'services/DB'
+import { DB, TimeEntry } from 'services'
 import { Label } from 'shared/types'
+import { EntryListContext } from 'shared/utils'
 import { EntryTimeField, Labels } from '../../index'
 import {
   ActionsWrapper,
@@ -9,6 +11,8 @@ import {
   Item,
 } from './ListItem.style'
 import { calculateTimeEntry, getSelectedLabels } from './ListItem.utils'
+
+const db = new DB()
 
 interface ListItemProps extends TimeEntry {
   labels: Label[]
@@ -20,7 +24,14 @@ const ListItem = ({
   selectedLabels,
   timeEntryDescription,
   labels,
+  id,
 }: ListItemProps) => {
+  const { setUpdateEntryList } = useContext(EntryListContext) || {}
+  const deleteEntry = () => {
+    db.deleteTimeEntry(id)
+    setUpdateEntryList?.(true)
+  }
+
   return (
     <Item>
       <EntryDescription defaultValue={timeEntryDescription} />
@@ -34,11 +45,11 @@ const ListItem = ({
       </div>
 
       <ActionsWrapper>
-        <Button>
-          <BsFillTrashFill color="accent" />
+        <Button onClick={deleteEntry}>
+          <BsFillTrashFill />
         </Button>
         <Button>
-          <BsFillPencilFill color="accent" />
+          <BsFillPencilFill />
         </Button>
       </ActionsWrapper>
     </Item>
