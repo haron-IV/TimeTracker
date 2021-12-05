@@ -2,7 +2,7 @@ import { validation } from 'config'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { DB } from 'services'
 import { ID, Label } from 'shared/types'
-import { EntryListContext } from 'shared/utils'
+import { EntryListContext, LabelsContext } from 'shared/utils'
 
 const db = new DB()
 
@@ -25,7 +25,6 @@ export const useToggleLabel = (
 
 export const useFieldValues = () => {
   const [timeEntryDescription, setTimeEntryDescription] = useState('')
-  const [labels, setLabels] = useState<Label[]>(db.getLabels())
   const [selectedLabels, setSelectedLabels] = useState<SelectedLabels>([])
   const [entryTimeHours, setEntryTimeHours] = useState(0)
   const [entryTimeMinutes, setEntryTimeMinutes] = useState(0)
@@ -33,8 +32,6 @@ export const useFieldValues = () => {
   return {
     timeEntryDescription,
     setTimeEntryDescription,
-    labels,
-    setLabels,
     selectedLabels,
     setSelectedLabels,
     entryTimeHours,
@@ -107,12 +104,12 @@ export const useOnAdd = (props: UseOnAddProps) => {
 }
 
 export const useUpdateLabels = (setLabels: (labels: Label[]) => void) => {
-  const [updateLabels, setUpdateLabels] = useState(false)
+  const { updateLabels, setUpdateLabels } = useContext(LabelsContext) || {}
 
   useEffect(() => {
-    if (updateLabels) setLabels(db.getLabels())
-    setUpdateLabels(false)
-  }, [updateLabels, setLabels])
-
-  return { updateLabels, setUpdateLabels }
+    if (updateLabels) {
+      setLabels(db.getLabels())
+      setUpdateLabels?.(false)
+    }
+  }, [updateLabels])
 }

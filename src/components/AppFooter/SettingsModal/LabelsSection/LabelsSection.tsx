@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
   BsArrowReturnLeft,
   BsCheck2,
@@ -8,6 +8,7 @@ import {
 } from 'react-icons/bs'
 import { DB } from 'services'
 import { Label, LabelProps } from 'shared/types'
+import { LabelsContext } from 'shared/utils'
 import { useToggle } from 'shared/utils/hooks'
 import { LabelItem } from '../../../Labels/AddNewLabel'
 import {
@@ -27,18 +28,21 @@ type LabelPropsWithDelete = Omit<LabelProps, 'onClick'> & {
 //TODO: this component could be used as global label component
 
 const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
+  const { setUpdateLabels } = useContext(LabelsContext) || {}
   const [clicked, toggleClicked] = useToggle()
   const [editClicked, toggleEditClicked] = useToggle()
   const [newLabelName, setNewLabelName] = useState(labelName)
   const deleteLabel = () => {
     id && db.deleteLabel(id)
     setLabels(db.getLabels())
+    setUpdateLabels?.(true)
   }
   const updateLabel = () => {
     newLabelName && id && db.editLabel(newLabelName, id)
     setLabels(db.getLabels())
     toggleClicked()
     toggleEditClicked()
+    setUpdateLabels?.(true)
   }
 
   return (
