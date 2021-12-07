@@ -64,7 +64,14 @@ export const useChangeDate = (
     const {
       dateObj: { day, month, year },
     } = DBUtils.getDate(currentDate)
-
-    setDateFunc(`${year}-${month}-${addLeadingZero(day + incrementValue)}`)
+    if (day === 1 && incrementValue < 1) {
+      //TODO: get how many days the month have
+      setDateFunc(`${year}-${month - 1}-${addLeadingZero(30)}`)
+      //TODO: base if day >= 30 on how many days day have
+    } else if (day >= 30 && incrementValue >= 1) {
+      setDateFunc(`${year}-${month + 1}-${addLeadingZero(1)}`)
+    } else {
+      setDateFunc(`${year}-${month}-${addLeadingZero(day + incrementValue)}`)
+    }
   }
 }
