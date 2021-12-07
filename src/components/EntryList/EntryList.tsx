@@ -16,7 +16,14 @@ import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
 
 const EntryList = () => {
-  const { entriesFromDay, labels, targetDate, setTargetDate } = useEntryList()
+  const {
+    entriesFromDay,
+    labels,
+    targetDate,
+    summedTimeFromDay,
+    summedTimeFromDayScaled,
+    setTargetDate,
+  } = useEntryList()
   const setDate = useChangeDate(setTargetDate, targetDate)
   const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTargetDate(e.target.value)
@@ -35,6 +42,17 @@ const EntryList = () => {
             <BsArrowRightCircle />
           </Button>
         </ControlsWrapper>
+        <h1>
+          <div>
+            regular time:
+            {summedTimeFromDay.hours} : {summedTimeFromDay.minutes}
+          </div>
+
+          <div>
+            scaled:
+            {summedTimeFromDayScaled.hours} : {summedTimeFromDayScaled.minutes}
+          </div>
+        </h1>
       </div>
       <List>
         {entriesFromDay.map(item => (
