@@ -16,6 +16,8 @@ import {
 import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
 import TimeSumup from './TimeSumup'
+import { Button as BaseButton } from 'shared/components'
+import console from 'console'
 
 type ChangeEv = ChangeEvent<HTMLInputElement>
 
@@ -60,6 +62,16 @@ const EntryList = () => {
           </EmptyList>
         )}
       </List>
+      <BaseButton
+        variant="contained"
+        color="red"
+        type="submit"
+        onClick={() => {
+          alert()
+        }}
+      >
+        siema elo
+      </BaseButton>
     </EntryListSection>
   )
 }

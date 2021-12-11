@@ -1,4 +1,4 @@
-export const DEFAULT_BORDER_RADIUS = 3
+export const DEFAULT_BORDER_RADIUS = 4
 export const DEFAULT_BUTTON_PADDING_Y = 5
 export const DEFAULT_BUTTON_PADDING_X = 15
 
