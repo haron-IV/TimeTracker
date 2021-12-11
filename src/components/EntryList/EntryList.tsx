@@ -14,6 +14,7 @@ import {
 } from './EntryList.style'
 import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
+import TimeSumup from './TimeSumup'
 
 const EntryList = () => {
   const {
@@ -42,17 +43,10 @@ const EntryList = () => {
             <BsArrowRightCircle />
           </Button>
         </ControlsWrapper>
-        <h1>
-          <div>
-            regular time:
-            {summedTimeFromDay.hours} : {summedTimeFromDay.minutes}
-          </div>
-
-          <div>
-            scaled:
-            {summedTimeFromDayScaled.hours} : {summedTimeFromDayScaled.minutes}
-          </div>
-        </h1>
+        <TimeSumup
+          regularTime={summedTimeFromDay}
+          scaledTime={summedTimeFromDayScaled}
+        />
       </div>
       <List>
         {entriesFromDay.map(item => (
