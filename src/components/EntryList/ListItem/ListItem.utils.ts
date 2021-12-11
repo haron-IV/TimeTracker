@@ -2,7 +2,7 @@ import { TIME_MULTIPLY_RATIO } from 'config'
 import { Label } from 'shared/types'
 
 export const calculateTimeEntry = (hours: number, minutes: number) => {
-  const scaledTime = Math.floor(minutes / TIME_MULTIPLY_RATIO)
+  const scaledTime = Math.round(minutes / TIME_MULTIPLY_RATIO)
 
   return `${hours}.${scaledTime}`
 }
