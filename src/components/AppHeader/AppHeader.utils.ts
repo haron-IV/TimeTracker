@@ -1,13 +1,12 @@
 import { MINUTES_LIMIT } from 'config'
 import { useState } from 'react'
-import { getScaledMinutes } from 'shared/utils/helpers'
+import { getScaledMinutes } from 'shared/utils'
 
 const MINUTES_LIMIT_LOCAL = MINUTES_LIMIT + 1
 
 export const useTimeCalculator = () => {
   const [minutes, setMinutes] = useState(0)
   const [error, setError] = useState('')
-
   const scaledTime = getScaledMinutes(minutes)
 
   const handleChange = (value: string) => {

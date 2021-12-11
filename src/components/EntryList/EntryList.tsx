@@ -1,4 +1,5 @@
 import { palette } from 'config'
+import { ChangeEvent } from 'react'
 import {
   BsArrowLeftCircle,
   BsArrowRightCircle,
@@ -16,6 +17,8 @@ import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
 import TimeSumup from './TimeSumup'
 
+type ChangeEv = ChangeEvent<HTMLInputElement>
+
 const EntryList = () => {
   const {
     entriesFromDay,
@@ -26,9 +29,7 @@ const EntryList = () => {
     setTargetDate,
   } = useEntryList()
   const setDate = useChangeDate(setTargetDate, targetDate)
-  const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTargetDate(e.target.value)
-  }
+  const onDateChange = (e: ChangeEv) => setTargetDate(e.target.value)
 
   return (
     <EntryListSection>
