@@ -9,3 +9,4 @@ export interface LabelProps {
   id?: ID
   active?: boolean
 }
+export type Color = 'primary' | 'text' | string

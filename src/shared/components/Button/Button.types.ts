@@ -1,18 +1,9 @@
 import { ButtonHTMLAttributes, MouseEventHandler } from 'react'
-
-export enum Variant {
-  contained = 'contained',
-  outlined = 'outlined',
-}
-
-export enum Color {
-  primary = 'primary',
-  text = 'text',
-}
+import { Color } from 'shared/types'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'contained' | 'outlined'
-  color: 'primary' | 'text' | string
+  color: Color
   onClick?: MouseEventHandler<HTMLButtonElement>
   margin?: string | number
 }
