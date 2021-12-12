@@ -15,11 +15,3 @@ export const Footer = styled('footer')({
   alignItems: 'center',
   gap: SPACING_REGULAR,
 })
-
-export const SettingsButton = styled('button')({
-  width: 30,
-  height: 30,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-})

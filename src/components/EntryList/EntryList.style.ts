@@ -12,6 +12,7 @@ import {
   transition,
   typography,
 } from 'config'
+import { Button as BaseButton } from 'shared/components'
 import styled from 'styled-components'
 
 export const EntryListSection = styled('section')({
@@ -32,29 +33,6 @@ export const ControlsWrapper = styled('div')({
   display: 'flex',
   alignItems: 'center',
 })
-
-interface ButtonProps {
-  side: 'left' | 'right'
-}
-
-export const Button = styled('button')<ButtonProps>(({ side }) => ({
-  padding: `${DEFAULT_BUTTON_PADDING_Y}px ${DEFAULT_BUTTON_PADDING_X}px`,
-  border: 'none',
-  backgroundColor: palette.primary.light,
-  transition: `background-color ease-in-out ${transition.time.fast}ms, box-shadow ease-out ${transition.time.instant}`,
-  borderRadius: DEFAULT_BORDER_RADIUS,
-  marginTop: `${SPACING_SMALL}px`,
-  marginRight: side === 'left' ? `${SPACING_REGULAR}px` : 0,
-  marginLeft: side === 'right' ? `${SPACING_REGULAR}px` : 0,
-  cursor: 'pointer',
-  boxShadow: palette.shadows.box1,
-  '&:hover': {
-    backgroundColor: palette.primary.primary,
-  },
-  '&:active': {
-    boxShadow: palette.shadows.box0,
-  },
-}))
 
 export const DateField = styled('input')({
   fontSize: typography.fontSize.regular,

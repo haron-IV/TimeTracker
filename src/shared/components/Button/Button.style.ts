@@ -85,7 +85,7 @@ const getVariant = (
 }
 
 export const BaseButton = styled('button')<BaseButtonProps>(
-  ({ variant = 'contained', color }) => ({
+  ({ variant = 'contained', color, margin }) => ({
     padding: `${SPACING_SMALL}px ${SPACING_MID}px`,
     fontSize: typography.fontSize.regular,
     fontWeight: typography.fontWeight.mid,
@@ -93,6 +93,10 @@ export const BaseButton = styled('button')<BaseButtonProps>(
     borderRadius: DEFAULT_BORDER_RADIUS,
     boxShadow: palette.shadows.box0,
     cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin,
     ...getVariant(variant, color).base,
     transition: `box-shadow ease-in-out ${transition.time.fast}ms, background-color ease-in-out ${transition.time.medium}ms`,
 

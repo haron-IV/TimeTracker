@@ -13,8 +13,8 @@ export enum Color {
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'contained' | 'outlined'
   color: 'primary' | 'text' | string
-  onClick: MouseEventHandler<HTMLButtonElement>
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  margin?: string | number
 }
 
-export interface BaseButtonProps
-  extends Pick<ButtonProps, 'variant' | 'color'> {}
+export interface BaseButtonProps extends Omit<ButtonProps, 'onClick'> {}

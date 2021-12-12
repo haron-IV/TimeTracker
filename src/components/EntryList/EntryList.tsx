@@ -1,12 +1,12 @@
-import { palette } from 'config'
+import { palette, SPACING_SMALL } from 'config'
 import { ChangeEvent } from 'react'
 import {
   BsArrowLeftCircle,
   BsArrowRightCircle,
   BsExclamationOctagon,
 } from 'react-icons/bs'
+import { Button } from 'shared/components'
 import {
-  Button,
   ControlsWrapper,
   DateField,
   EmptyList,
@@ -16,8 +16,6 @@ import {
 import { useChangeDate, useEntryList } from './EntryList.utils'
 import ListItem from './ListItem'
 import TimeSumup from './TimeSumup'
-import { Button as BaseButton } from 'shared/components'
-import console from 'console'
 
 type ChangeEv = ChangeEvent<HTMLInputElement>
 
@@ -38,12 +36,22 @@ const EntryList = () => {
       <div>
         <b>Selected date:</b>
         <ControlsWrapper>
-          <Button onClick={() => setDate(-1)} side="left">
-            <BsArrowLeftCircle />
+          <Button
+            onClick={() => setDate(-1)}
+            color="primary"
+            variant="outlined"
+            margin={SPACING_SMALL}
+          >
+            <BsArrowLeftCircle size={13} />
           </Button>
           <DateField type="date" value={targetDate} onChange={onDateChange} />
-          <Button onClick={() => setDate(1)} side="right">
-            <BsArrowRightCircle />
+          <Button
+            onClick={() => setDate(1)}
+            color="primary"
+            variant="outlined"
+            margin={SPACING_SMALL}
+          >
+            <BsArrowRightCircle size={13} />
           </Button>
         </ControlsWrapper>
         <TimeSumup
@@ -62,16 +70,6 @@ const EntryList = () => {
           </EmptyList>
         )}
       </List>
-      <BaseButton
-        variant="contained"
-        color="red"
-        type="submit"
-        onClick={() => {
-          alert()
-        }}
-      >
-        siema elo
-      </BaseButton>
     </EntryListSection>
   )
 }
