@@ -4,6 +4,7 @@ import { Input as BaseInput, InputWrapper } from './Input.style'
 
 // TODO: refactorize
 // TODO add error handling
+//TODO: use placeholder as label
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   color: Color

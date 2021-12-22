@@ -45,6 +45,7 @@ export const Input = styled('input')<InputProps>(({ color }) => ({
   '&::placeholder': {
     fontWeight: typography.fontWeight.mid,
     color: lighten(0.1, palette.text.secondary),
+    transition: `transform ease-in-out ${transition.time.fast}ms`,
   },
 }))
 
@@ -84,5 +85,11 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   }
   input:focus ~ label {
     opacity: 1;
+  }
+  input:focus {
+    position: absolute;
+    ::placeholder {
+      transform: translateY(-20px) scale(0.7);
+    }
   }
 `

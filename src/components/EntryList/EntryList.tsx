@@ -71,8 +71,8 @@ const EntryList = () => {
         )}
       </List>
       <Input
-        placeholder="siema"
-        label="name"
+        placeholder="test"
+        label="test"
         color="red"
         onChange={() => console.log(1)}
         type="number"
