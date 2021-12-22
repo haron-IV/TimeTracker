@@ -82,17 +82,16 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
         onClick={toggleLabel}
       />
 
-      <div>
-        <EntryTimeField
-          hours={entryTimeHours}
-          minutes={entryTimeMinutes}
-          setHours={setEntryTimeHours}
-          setMinutes={setEntryTimeMinutes}
-        />
-        <ErrorIndicator error={errors?.timeEntry}>
-          {errors?.timeEntry}
-        </ErrorIndicator>
-      </div>
+      <EntryTimeField
+        hours={entryTimeHours}
+        minutes={entryTimeMinutes}
+        setHours={setEntryTimeHours}
+        setMinutes={setEntryTimeMinutes}
+      />
+      <ErrorIndicator error={errors?.timeEntry}>
+        {errors?.timeEntry}
+      </ErrorIndicator>
+
       <AddEntryButton onClick={onEntryAdd} />
     </Section>
   )

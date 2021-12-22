@@ -5,7 +5,7 @@ import {
   BsArrowRightCircle,
   BsExclamationOctagon,
 } from 'react-icons/bs'
-import { Button } from 'shared/components'
+import { Button, Input } from 'shared/components'
 import {
   ControlsWrapper,
   DateField,

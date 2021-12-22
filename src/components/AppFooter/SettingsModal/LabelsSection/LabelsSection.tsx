@@ -7,6 +7,7 @@ import {
   BsX,
 } from 'react-icons/bs'
 import { DB } from 'services'
+import { InputWrapper } from 'shared/components/Input/Input.style'
 import { Label, LabelProps } from 'shared/types'
 import { LabelsContext } from 'shared/utils'
 import { useToggle } from 'shared/utils/hooks'
@@ -15,6 +16,7 @@ import {
   ActionButton,
   ActionButtonWrapper,
   EditLabelNameWrapper,
+  Input,
   LabelItemWrapper,
   LabelsWrapper,
 } from './LabelsSection.style'
@@ -63,7 +65,8 @@ const LabelComp = ({ labelName, id, setLabels }: LabelPropsWithDelete) => {
 
       {editClicked && (
         <EditLabelNameWrapper>
-          <input
+          <Input
+            color="primary"
             type="text"
             onChange={e => setNewLabelName(e.target.value)}
             value={newLabelName}

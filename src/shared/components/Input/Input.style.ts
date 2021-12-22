@@ -4,6 +4,7 @@ import {
   SPACING_REGULAR,
   transition,
   typography,
+  zIndex,
 } from 'config'
 import { lighten } from 'polished'
 import { Color } from 'shared/types'
@@ -62,16 +63,16 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     display: flex;
     justify-content: center;
     font-size: ${typography.fontSize.regular};
-    z-index: 2;
+    z-index: ${zIndex.lvl1};
     left: 20px;
     top: -7px;
     transition: opacity ease-in-out ${transition.time.fast}ms;
     color: ${({ color, error }) => getColor(color, error)};
     ::before {
       top: 7px;
-      z-index: -2;
+      z-index: ${zIndex.lvl1Negative};
       position: absolute;
-      content: '${props => props.label}';
+      content: '${props => props.placeholder}';
       color: transparent;
       background-color: white;
       padding: 0 ${SPACING_REGULAR}px;
