@@ -5,7 +5,7 @@ import {
   BsArrowRightCircle,
   BsExclamationOctagon,
 } from 'react-icons/bs'
-import { Button, Input } from 'shared/components'
+import { Button } from 'shared/components'
 import {
   ControlsWrapper,
   DateField,
@@ -70,15 +70,6 @@ const EntryList = () => {
           </EmptyList>
         )}
       </List>
-      <Input
-        placeholder="test"
-        label="test"
-        color="red"
-        onChange={() => console.log(1)}
-        type="number"
-        margin={10}
-        width={100}
-      />
     </EntryListSection>
   )
 }

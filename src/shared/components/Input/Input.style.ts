@@ -8,14 +8,15 @@ import {
 import { lighten } from 'polished'
 import { Color } from 'shared/types'
 import styled from 'styled-components'
+import { InputProps } from './Input'
 
-// TODO: refactorize
-
-interface InputProps {
-  color: Color
+interface InputWrapperProps extends InputProps {
+  width?: string | number
 }
 
-const getColor = (color: Color) => {
+const getColor = (color: Color, error?: string) => {
+  if (error) return palette.error
+
   switch (color) {
     case 'primary': {
       return palette.primary.primary
@@ -29,17 +30,18 @@ const getColor = (color: Color) => {
   }
 }
 
-export const Input = styled('input')<InputProps>(({ color }) => ({
+type StyledInputProps = Pick<InputProps, 'color' | 'error'>
+export const Input = styled('input')<StyledInputProps>(({ color, error }) => ({
   border: `2px solid ${palette.divider}`,
   padding: SPACING_REGULAR,
   borderRadius: DEFAULT_BORDER_RADIUS,
   fontSize: typography.fontSize.mid,
-  caretColor: getColor(color),
+  caretColor: getColor(color, error),
   outline: 'none',
   width: 'inherit',
 
   '&:focus': {
-    border: `2px solid ${getColor(color)}`,
+    border: `2px solid ${getColor(color, error)}`,
   },
 
   '&::placeholder': {
@@ -49,19 +51,11 @@ export const Input = styled('input')<InputProps>(({ color }) => ({
   },
 }))
 
-interface InputWrapperProps {
-  label?: string
-  color: Color
-  margin?: string | number
-  width?: string | number
-}
-
 export const InputWrapper = styled.div<InputWrapperProps>`
   position: relative;
-  width: ${props =>
-    typeof props.width === 'string' ? props.width : `${props.width}px`};
-  margin: ${props =>
-    typeof props.margin === 'string' ? props.margin : `${props.margin}px`};
+  width: ${({ width }) => (typeof width === 'string' ? width : `${width}px`)};
+  margin: ${({ margin }) =>
+    typeof margin === 'string' ? margin : `${margin}px`};
   label {
     position: absolute;
     opacity: 0;
@@ -72,7 +66,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     left: 20px;
     top: -7px;
     transition: opacity ease-in-out ${transition.time.fast}ms;
-    color: ${props => getColor(props.color)};
+    color: ${({ color, error }) => getColor(color, error)};
     ::before {
       top: 7px;
       z-index: -2;
@@ -82,6 +76,9 @@ export const InputWrapper = styled.div<InputWrapperProps>`
       background-color: white;
       padding: 0 ${SPACING_REGULAR}px;
     }
+  }
+  span {
+    color: ${palette.error};
   }
   input:focus ~ label {
     opacity: 1;
