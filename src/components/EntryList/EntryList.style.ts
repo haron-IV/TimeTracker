@@ -1,18 +1,11 @@
 import {
   APP_HEADER_HEIGHT,
-  DEFAULT_BORDER_RADIUS,
-  DEFAULT_BUTTON_PADDING_X,
-  DEFAULT_BUTTON_PADDING_Y,
   ENTRY_LIST_MARGIN_TOP,
   ENTRY_LIST_PADDING_TOP,
   palette,
-  SPACING_REGULAR,
-  SPACING_SMALL,
   TIME_ENTRY_SECTION_HEIGHT,
-  transition,
   typography,
 } from 'config'
-import { Button as BaseButton } from 'shared/components'
 import styled from 'styled-components'
 
 export const EntryListSection = styled('section')({

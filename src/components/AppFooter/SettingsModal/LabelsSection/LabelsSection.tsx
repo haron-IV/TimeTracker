@@ -7,7 +7,6 @@ import {
   BsX,
 } from 'react-icons/bs'
 import { DB } from 'services'
-import { InputWrapper } from 'shared/components/Input/Input.style'
 import { Label, LabelProps } from 'shared/types'
 import { LabelsContext } from 'shared/utils'
 import { useToggle } from 'shared/utils/hooks'

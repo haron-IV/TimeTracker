@@ -1,8 +1,4 @@
-import {
-  ENTRY_DESCRIPTION_FIELD_HEIGHT,
-  ENTRY_DESCRIPTION_FIELD_WIDTH,
-  palette,
-} from 'config'
+import { palette } from 'config'
 import { darken, lighten } from 'polished'
 import { Color } from 'shared/types'
 import styled from 'styled-components'

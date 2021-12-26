@@ -5,7 +5,9 @@ import {
   ENTRY_DESCRIPTION_FIELD_WIDTH,
   TIME_ENTRY_SECTION_HEIGHT,
 } from 'config'
+import { DB } from 'services'
 import { ErrorIndicator, TextArea } from 'shared/components'
+import { ChangeEvent } from 'shared/types'
 import { AddEntryButton, EntryTimeField, Labels } from '../index'
 import {
   useFieldValues,
@@ -13,8 +15,6 @@ import {
   useToggleLabel,
   useUpdateLabels,
 } from './TimeEntrySection.utils'
-import { DB } from 'services'
-import { ChangeEvent } from 'shared/types'
 
 const db = new DB()
 

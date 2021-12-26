@@ -88,7 +88,6 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     opacity: ${({ withoutLabel }) => (withoutLabel ? 0 : 1)};
   }
   input:focus {
-    /* position: absolute; */ //TODO: check if that is needed here, cuz it due the problems
     ::placeholder {
       transform: translateY(-20px) scale(0.7);
     }
