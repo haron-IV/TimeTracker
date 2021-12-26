@@ -2,11 +2,11 @@ import { SPACING_SMALL } from 'config'
 import { useContext } from 'react'
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 import { DB, TimeEntry } from 'services'
-import { Button } from 'shared/components'
+import { Button, TextArea } from 'shared/components'
 import { Label } from 'shared/types'
 import { EntryListContext } from 'shared/utils'
 import { EntryTimeField, Labels } from '../../index'
-import { ActionsWrapper, EntryDescription, Item } from './ListItem.style'
+import { ActionsWrapper, Item } from './ListItem.style'
 import { calculateTimeEntry, getSelectedLabels } from './ListItem.utils'
 
 const db = new DB()
@@ -31,7 +31,12 @@ const ListItem = ({
 
   return (
     <Item>
-      <EntryDescription defaultValue={timeEntryDescription} />
+      <TextArea
+        value={timeEntryDescription}
+        color="primary"
+        height={75}
+        width={400}
+      />
       <Labels
         labels={labels}
         selectedLabels={getSelectedLabels(labels, selectedLabels)}

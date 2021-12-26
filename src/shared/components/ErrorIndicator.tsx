@@ -11,6 +11,5 @@ export const ErrorIndicator = styled('div')<ErrorIndicatorProps>(
     fontSize: '0.75rem',
     marginTop: TIME_FIELD_MARGIN,
     marginLeft: TIME_FIELD_MARGIN,
-    position: 'absolute',
   })
 )

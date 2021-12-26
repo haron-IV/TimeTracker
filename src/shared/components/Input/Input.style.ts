@@ -15,6 +15,7 @@ interface InputWrapperProps extends InputProps {
   width?: string | number
 }
 
+//TODO: make this function reusable
 const getColor = (color: Color, error?: string) => {
   if (error) return palette.error
 
