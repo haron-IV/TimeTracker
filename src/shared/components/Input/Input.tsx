@@ -6,8 +6,16 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   color: Color
   margin?: string | number
   error?: string
+  withoutLabel?: boolean
 }
-const Input = ({ color, margin, width, error, ...props }: InputProps) => {
+const Input = ({
+  color,
+  margin,
+  width,
+  error,
+  withoutLabel,
+  ...props
+}: InputProps) => {
   return (
     <InputWrapper
       placeholder={props.placeholder}
@@ -15,6 +23,7 @@ const Input = ({ color, margin, width, error, ...props }: InputProps) => {
       error={error}
       margin={margin}
       width={width}
+      withoutLabel={withoutLabel}
     >
       <BaseInput {...props} color={color} error={error} />
       <label>{props.placeholder}</label>

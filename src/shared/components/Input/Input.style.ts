@@ -40,6 +40,7 @@ export const Input = styled('input')<StyledInputProps>(({ color, error }) => ({
   caretColor: getColor(color, error),
   outline: 'none',
   width: 'inherit',
+  height: 'inherit',
 
   '&:focus': {
     border: `2px solid ${getColor(color, error)}`,
@@ -57,6 +58,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   width: ${({ width }) => (typeof width === 'string' ? width : `${width}px`)};
   margin: ${({ margin }) =>
     typeof margin === 'string' ? margin : `${margin}px`};
+  height: inherit;
   label {
     position: absolute;
     opacity: 0;
@@ -82,10 +84,10 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     color: ${palette.error};
   }
   input:focus ~ label {
-    opacity: 1;
+    opacity: ${({ withoutLabel }) => (withoutLabel ? 0 : 1)};
   }
   input:focus {
-    position: absolute;
+    /* position: absolute; */ //TODO: check if that is needed here, cuz it due the problems
     ::placeholder {
       transform: translateY(-20px) scale(0.7);
     }

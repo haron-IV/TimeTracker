@@ -16,9 +16,8 @@ const TimeCalculator = () => {
     <TimeCalculatorWrapper>
       <TimeFieldWrapper>
         <p>Scale your time to TimeSheet time</p>
-        {/* TODO: fix this input */}
         <Input
-          color="green"
+          color="text"
           name="minutes"
           placeholder="minutes"
           type="number"
@@ -28,8 +27,8 @@ const TimeCalculator = () => {
           error={error}
           width={95}
         />
+        <TimeOutput>{scaledTime === 100 ? '1 hour' : scaledTime}</TimeOutput>
       </TimeFieldWrapper>
-      <TimeOutput>{scaledTime === 100 ? '1 hour' : scaledTime}</TimeOutput>
     </TimeCalculatorWrapper>
   )
 }

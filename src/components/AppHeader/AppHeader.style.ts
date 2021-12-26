@@ -1,4 +1,4 @@
-import { APP_HEADER_HEIGHT, palette } from 'config'
+import { APP_HEADER_HEIGHT, palette, SPACING_MID } from 'config'
 import styled from 'styled-components'
 
 export const TimeCalculatorWrapper = styled('div')({
@@ -11,6 +11,9 @@ export const TimeCalculatorWrapper = styled('div')({
 
 export const TimeFieldWrapper = styled('div')({
   display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: SPACING_MID,
 })
 
 export const Header = styled('header')({
