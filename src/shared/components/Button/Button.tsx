@@ -1,6 +1,7 @@
 import { MouseEvent, PropsWithChildren, useRef, useState } from 'react'
 import { BaseButton, ButtonWrapper } from './Button.style'
 import { ButtonProps } from './Button.types'
+import { useThrottle } from 'rooks'
 
 //TODO: refactorize this component
 type MouseMoveEvent =
@@ -15,9 +16,10 @@ const Button = ({
   const ref = useRef<HTMLButtonElement>(null)
   const tooltipRef = useRef<HTMLSpanElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [throttledSetPosition] = useThrottle(setPosition, 30)
 
   const onMouseMove = (e: MouseMoveEvent) => {
-    setPosition({
+    throttledSetPosition({
       x: e.clientX - (tooltipRef.current?.offsetWidth || 0),
       y: e.clientY - (tooltipRef.current?.offsetHeight || 0) - 10,
     })
