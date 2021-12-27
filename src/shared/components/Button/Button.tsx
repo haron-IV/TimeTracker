@@ -1,9 +1,18 @@
 import { PropsWithChildren } from 'react'
-import { BaseButton } from './Button.style'
+import { BaseButton, ButtonWrapper } from './Button.style'
 import { ButtonProps } from './Button.types'
 
-const Button = (props: PropsWithChildren<ButtonProps>) => {
-  return <BaseButton {...props}>{props.children}</BaseButton>
+// TODO: here you can implement position of tooltip
+const Button = ({
+  disabledTooltip,
+  ...props
+}: PropsWithChildren<ButtonProps>) => {
+  return (
+    <ButtonWrapper>
+      <BaseButton {...props}>{props.children}</BaseButton>
+      {props.disabled && <span>{disabledTooltip}</span>}
+    </ButtonWrapper>
+  )
 }
 
 export default Button

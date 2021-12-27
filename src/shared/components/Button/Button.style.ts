@@ -42,8 +42,15 @@ const getColor = (color: BaseButtonProps['color']) => {
 
 const getVariant = (
   variant: BaseButtonProps['variant'],
-  color: BaseButtonProps['color']
+  color: BaseButtonProps['color'],
+  disabled: BaseButtonProps['disabled']
 ) => {
+  if (disabled) {
+    return {
+      backgroundColor: palette.text.secondary,
+      // pointerEvents: 'none',
+    }
+  }
   switch (variant) {
     case 'contained': {
       return {
@@ -85,24 +92,25 @@ const getVariant = (
 }
 
 export const BaseButton = styled('button')<BaseButtonProps>(
-  ({ variant = 'contained', color, margin }) => ({
+  ({ variant = 'contained', color, margin, disabled }) => ({
     padding: `${SPACING_SMALL}px ${SPACING_MID}px`,
     fontSize: typography.fontSize.regular,
     fontWeight: typography.fontWeight.mid,
     letterSpacing: 0.5,
     borderRadius: DEFAULT_BORDER_RADIUS,
     boxShadow: palette.shadows.box0,
-    cursor: 'pointer',
+    cursor: disabled ? 'not-allowed' : 'pointer',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     margin,
-    ...getVariant(variant, color).base,
+
+    ...getVariant(variant, color, disabled).base,
     transition: `box-shadow ease-in-out ${transition.time.fast}ms, background-color ease-in-out ${transition.time.medium}ms`,
 
     '&:hover': {
       boxShadow: palette.shadows.box2,
-      ...getVariant(variant, color).pseudo?.hover,
+      ...getVariant(variant, color, disabled).pseudo?.hover,
     },
     '&:active': {
       transform: 'scale(0.98)',
@@ -111,3 +119,20 @@ export const BaseButton = styled('button')<BaseButtonProps>(
     },
   })
 )
+
+export const ButtonWrapper = styled('div')({
+  position: 'relative',
+  span: {
+    opacity: 0,
+    position: 'absolute',
+    transition: `opacity ease-in-out ${transition.time.fast}ms`,
+    backgroundColor: palette.text.secondary,
+    color: palette.text.text,
+    padding: `${SPACING_SMALL}px ${SPACING_MID}px`,
+    borderRadius: DEFAULT_BORDER_RADIUS,
+    margin: SPACING_SMALL,
+  },
+  'button:hover ~ span': {
+    opacity: 1,
+  },
+})

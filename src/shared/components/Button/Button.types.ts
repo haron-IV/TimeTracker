@@ -6,6 +6,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color: Color
   onClick?: MouseEventHandler<HTMLButtonElement>
   margin?: string | number
+  disabled?: boolean
+  disabledTooltip?: string
 }
 
 export interface BaseButtonProps extends Omit<ButtonProps, 'onClick'> {}
