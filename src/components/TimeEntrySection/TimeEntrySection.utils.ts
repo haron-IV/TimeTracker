@@ -48,7 +48,7 @@ interface UseOnAddProps {
   entryTimeMinutes: number
 }
 
-interface Errors {
+export interface TimeEntryErrors {
   timeEntryDescription?: string
   timeEntry?: string
 }
@@ -60,7 +60,7 @@ const initialErrorsState = {
 
 export const useOnAdd = (props: UseOnAddProps) => {
   const ctx = useContext(EntryListContext)
-  const [errors, setErrors] = useState<Errors>(initialErrorsState)
+  const [errors, setErrors] = useState<TimeEntryErrors>(initialErrorsState)
 
   const validate = () => {
     if (!props.timeEntryDescription)

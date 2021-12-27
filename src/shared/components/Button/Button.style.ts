@@ -5,8 +5,10 @@ import {
   SPACING_SMALL,
   transition,
   typography,
+  zIndex,
 } from 'config'
 import { lighten } from 'polished'
+import { MouseEvent } from 'react'
 import styled, { CSSProperties } from 'styled-components'
 import { BaseButtonProps } from './Button.types'
 
@@ -43,14 +45,14 @@ const getColor = (color: BaseButtonProps['color']) => {
 const getVariant = (
   variant: BaseButtonProps['variant'],
   color: BaseButtonProps['color'],
-  disabled: BaseButtonProps['disabled']
+  disabled: BaseButtonProps['isDisabled']
 ) => {
-  if (disabled) {
+  if (disabled)
     return {
       backgroundColor: palette.text.secondary,
-      // pointerEvents: 'none',
+      border: `1px solid ${palette.text.secondary}`,
     }
-  }
+
   switch (variant) {
     case 'contained': {
       return {
@@ -92,25 +94,23 @@ const getVariant = (
 }
 
 export const BaseButton = styled('button')<BaseButtonProps>(
-  ({ variant = 'contained', color, margin, disabled }) => ({
+  ({ variant = 'contained', color, margin, isDisabled }) => ({
     padding: `${SPACING_SMALL}px ${SPACING_MID}px`,
     fontSize: typography.fontSize.regular,
     fontWeight: typography.fontWeight.mid,
     letterSpacing: 0.5,
     borderRadius: DEFAULT_BORDER_RADIUS,
     boxShadow: palette.shadows.box0,
-    cursor: disabled ? 'not-allowed' : 'pointer',
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     margin,
-
-    ...getVariant(variant, color, disabled).base,
+    ...getVariant(variant, color, isDisabled).base,
     transition: `box-shadow ease-in-out ${transition.time.fast}ms, background-color ease-in-out ${transition.time.medium}ms`,
-
     '&:hover': {
       boxShadow: palette.shadows.box2,
-      ...getVariant(variant, color, disabled).pseudo?.hover,
+      ...getVariant(variant, color, isDisabled).pseudo?.hover,
     },
     '&:active': {
       transform: 'scale(0.98)',
@@ -119,20 +119,32 @@ export const BaseButton = styled('button')<BaseButtonProps>(
     },
   })
 )
-
-export const ButtonWrapper = styled('div')({
-  position: 'relative',
-  span: {
-    opacity: 0,
-    position: 'absolute',
-    transition: `opacity ease-in-out ${transition.time.fast}ms`,
-    backgroundColor: palette.text.secondary,
-    color: palette.text.text,
-    padding: `${SPACING_SMALL}px ${SPACING_MID}px`,
-    borderRadius: DEFAULT_BORDER_RADIUS,
-    margin: SPACING_SMALL,
-  },
-  'button:hover ~ span': {
-    opacity: 1,
-  },
-})
+interface ButtonWrapperProps {
+  position: {
+    x: number
+    y: number
+  }
+}
+export const ButtonWrapper = styled('div')<ButtonWrapperProps>(
+  ({ position }) => ({
+    span: {
+      opacity: 0,
+      position: 'absolute',
+      transition: `opacity ease-in-out ${transition.time.fast}ms`,
+      backgroundColor: palette.text.secondary,
+      color: palette.text.text,
+      padding: `${SPACING_SMALL}px ${SPACING_MID}px`,
+      borderRadius: DEFAULT_BORDER_RADIUS,
+      margin: SPACING_SMALL,
+      width: 'auto',
+      height: 'inherit',
+      left: 0,
+      top: 0,
+      transform: `translate(${position.x}px, ${position.y}px)`,
+    },
+    'button:hover ~ span': {
+      opacity: 1,
+      zIndex: zIndex.max,
+    },
+  })
+)

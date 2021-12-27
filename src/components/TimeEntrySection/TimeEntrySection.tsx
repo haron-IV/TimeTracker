@@ -96,7 +96,7 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
         {errors?.timeEntry}
       </ErrorIndicator>
 
-      <AddEntryButton onClick={onEntryAdd} />
+      <AddEntryButton onClick={onEntryAdd} errors={errors} />
     </Section>
   )
 }

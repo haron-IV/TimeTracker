@@ -1,13 +1,22 @@
+import { TimeEntryErrors } from 'components/TimeEntrySection/TimeEntrySection.utils'
 import { Button } from 'shared/components'
 
 interface AddEntryButtonProps {
   onClick: () => void
+  errors: TimeEntryErrors
 }
 
-// TODO: add validation (fe. if there is no time )
-const AddEntryButton = ({ onClick }: AddEntryButtonProps) => {
+const AddEntryButton = ({ onClick, errors }: AddEntryButtonProps) => {
+  const disabled = Boolean(errors.timeEntryDescription || errors.timeEntry)
+  const disabledMessage = errors.timeEntryDescription || errors.timeEntry
+
   return (
-    <Button color="primary" onClick={() => onClick()}>
+    <Button
+      color="primary"
+      onClick={() => onClick()}
+      disabled={disabled}
+      disabledTooltip={disabledMessage}
+    >
       Add
     </Button>
   )

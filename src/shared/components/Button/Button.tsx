@@ -1,16 +1,40 @@
-import { PropsWithChildren } from 'react'
+import { MouseEvent, PropsWithChildren, useRef, useState } from 'react'
 import { BaseButton, ButtonWrapper } from './Button.style'
 import { ButtonProps } from './Button.types'
 
-// TODO: here you can implement position of tooltip
+//TODO: refactorize this component
+type MouseMoveEvent =
+  | MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  | MouseEvent<HTMLButtonElement, MouseEvent<Element, globalThis.MouseEvent>>
+
 const Button = ({
+  disabled,
   disabledTooltip,
   ...props
 }: PropsWithChildren<ButtonProps>) => {
+  const ref = useRef<HTMLButtonElement>(null)
+  const tooltipRef = useRef<HTMLSpanElement>(null)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+
+  const onMouseMove = (e: MouseMoveEvent) => {
+    setPosition({
+      x: e.clientX - (tooltipRef.current?.offsetWidth || 0),
+      y: e.clientY - (tooltipRef.current?.offsetHeight || 0) - 10,
+    })
+  }
+
   return (
-    <ButtonWrapper>
-      <BaseButton {...props}>{props.children}</BaseButton>
-      {props.disabled && <span>{disabledTooltip}</span>}
+    <ButtonWrapper position={position}>
+      <BaseButton
+        {...props}
+        isDisabled={disabled}
+        onMouseMove={onMouseMove}
+        ref={ref}
+      >
+        {props.children}
+      </BaseButton>
+
+      {disabled && <span ref={tooltipRef}>{disabledTooltip}</span>}
     </ButtonWrapper>
   )
 }
