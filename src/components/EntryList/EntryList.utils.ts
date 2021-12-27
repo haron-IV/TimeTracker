@@ -22,7 +22,7 @@ export const useEntryList = (date?: string) => {
     if (!ctx?.updateEntryList) return
     setTimeEntryItems(db.getTimeEntries())
     ctx.setUpdateEntryList(false)
-  }, [ctx?.updateEntryList])
+  }, [ctx?.updateEntryList, ctx])
 
   const entriesFromDay = getEntriesFromDay(timeEntryItems, targetDate)
   const summedTimeFromDay = sumUpEntriesTime(entriesFromDay)
@@ -37,7 +37,7 @@ export const useEntryList = (date?: string) => {
     setTargetDate,
   }
 }
-const sumUpEntriesTime = (entries: TimeEntry[], scaled: boolean = false) => {
+const sumUpEntriesTime = (entries: TimeEntry[], scaled = false) => {
   const { hours, minutes } = entries.reduce(
     (acc, curr) => {
       let hours = acc.hours + curr.entryTimeHours

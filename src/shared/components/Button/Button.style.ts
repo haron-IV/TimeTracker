@@ -73,14 +73,14 @@ const getVariant = (
           color: getColor(color).base.backgroundColor,
           backgroundColor: `${lighten(
             0.49,
-            getColor(color).base.backgroundColor!
+            getColor(color).base.backgroundColor || ''
           )}`,
         },
         pseudo: {
           hover: {
             backgroundColor: `${lighten(
               0.45,
-              getColor(color).base.backgroundColor!
+              getColor(color).base.backgroundColor || ''
             )}`,
           },
         },

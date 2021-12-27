@@ -1,11 +1,11 @@
-import { createContext } from 'react'
+import { createContext, Dispatch, SetStateAction } from 'react'
 
 export const EntryListContext = createContext<{
   updateEntryList: boolean
-  setUpdateEntryList: React.Dispatch<React.SetStateAction<boolean>>
+  setUpdateEntryList: Dispatch<SetStateAction<boolean>>
 } | null>(null)
 
 export const LabelsContext = createContext<{
   updateLabels: boolean
-  setUpdateLabels: React.Dispatch<React.SetStateAction<boolean>>
+  setUpdateLabels: Dispatch<SetStateAction<boolean>>
 } | null>(null)
