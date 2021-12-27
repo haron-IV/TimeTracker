@@ -30,7 +30,7 @@ export const StyledLabel = styled('button')<LabelProps>(({ active }) => ({
   boxShadow: palette.shadows.box1,
   fontWeight: active
     ? typography.fontWeight.bold
-    : typography.fontWeight.medium,
+    : typography.fontWeight.regular,
   transition: `all ease-in-out ${transition.time.instant}ms`,
   '&:hover': {
     boxShadow: palette.shadows.box0,

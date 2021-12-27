@@ -7,7 +7,10 @@ export const typography = {
     margin: '0.5rem',
   },
   fontWeight: {
-    medium: 400,
+    thin: 100,
+    light: 300,
+    regular: 400,
+    mid: 500,
     bold: 700,
   },
   fontSize: {

@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import { TIME_ENTRY_SECTION_HEIGHT } from 'config'
-import { ErrorIndicator } from 'shared/components'
 import {
-  AddEntryButton,
-  EntryDescriptionField,
-  EntryTimeField,
-  Labels,
-} from '../index'
+  ENTRY_DESCRIPTION_FIELD_HEIGHT,
+  ENTRY_DESCRIPTION_FIELD_WIDTH,
+  TIME_ENTRY_SECTION_HEIGHT,
+} from 'config'
+import { DB } from 'services'
+import { ErrorIndicator, TextArea } from 'shared/components'
+import { ChangeEvent } from 'shared/types'
+import { AddEntryButton, EntryTimeField, Labels } from '../index'
 import {
   useFieldValues,
   useOnAdd,
   useToggleLabel,
   useUpdateLabels,
 } from './TimeEntrySection.utils'
-import { DB } from 'services'
 
 const db = new DB()
 
@@ -63,17 +63,21 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
   ])
   const [labels, setLabels] = useState(db.getLabels())
   useUpdateLabels(setLabels)
+  const handleChange = (e: ChangeEvent<string>) => {
+    setTimeEntryDescription(e.target.value)
+  }
 
   return (
     <Section>
       <div>
-        <EntryDescriptionField
+        <TextArea
+          width={ENTRY_DESCRIPTION_FIELD_WIDTH}
+          height={ENTRY_DESCRIPTION_FIELD_HEIGHT}
+          color="primary"
           value={timeEntryDescription}
-          onChange={setTimeEntryDescription}
+          onChange={handleChange}
+          error={errors.timeEntryDescription}
         />
-        <ErrorIndicator error={errors?.timeEntryDescription}>
-          {errors?.timeEntryDescription}
-        </ErrorIndicator>
       </div>
 
       <Labels
@@ -82,18 +86,17 @@ const TimeEntrySection = ({ updateEntryList }: TimeEntrySectionProps) => {
         onClick={toggleLabel}
       />
 
-      <div>
-        <EntryTimeField
-          hours={entryTimeHours}
-          minutes={entryTimeMinutes}
-          setHours={setEntryTimeHours}
-          setMinutes={setEntryTimeMinutes}
-        />
-        <ErrorIndicator error={errors?.timeEntry}>
-          {errors?.timeEntry}
-        </ErrorIndicator>
-      </div>
-      <AddEntryButton onClick={onEntryAdd} />
+      <EntryTimeField
+        hours={entryTimeHours}
+        minutes={entryTimeMinutes}
+        setHours={setEntryTimeHours}
+        setMinutes={setEntryTimeMinutes}
+      />
+      <ErrorIndicator error={errors?.timeEntry}>
+        {errors?.timeEntry}
+      </ErrorIndicator>
+
+      <AddEntryButton onClick={onEntryAdd} errors={errors} />
     </Section>
   )
 }

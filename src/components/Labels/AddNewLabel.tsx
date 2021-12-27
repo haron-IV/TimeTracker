@@ -1,6 +1,7 @@
 import { PropsWithChildren, useState } from 'react'
 import { BsFillTrashFill, BsPlus } from 'react-icons/bs'
 import { DB } from 'services'
+import { Button, Input } from 'shared/components'
 import { LabelProps } from 'shared/types'
 import { StyledLabel } from './Labels.style'
 
@@ -35,21 +36,24 @@ export const AddNewLabel = ({ onAdd }: AddNewLabelProps) => {
     <>
       <LabelItem active={false} onClick={() => setInitiated(true)}>
         {isInitiated ? (
-          <input
+          <Input
+            color="primary"
             value={labelName}
             onChange={handleOnChange}
             placeholder="label name"
+            height={20}
             onKeyPress={onKeyPress}
             autoFocus
+            withoutLabel
           />
         ) : (
           <BsPlus />
         )}
       </LabelItem>
       {isInitiated && (
-        <button onClick={() => setInitiated(false)}>
+        <Button color="primary" onClick={() => setInitiated(false)}>
           <BsFillTrashFill />
-        </button>
+        </Button>
       )}
     </>
   )

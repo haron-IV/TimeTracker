@@ -1,7 +1,7 @@
 import { validation } from 'config'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { DB } from 'services'
-import { ID, Label } from 'shared/types'
+import { ID, Label, TimeEntryErrors } from 'shared/types'
 import { EntryListContext, LabelsContext } from 'shared/utils'
 
 const db = new DB()
@@ -48,11 +48,6 @@ interface UseOnAddProps {
   entryTimeMinutes: number
 }
 
-interface Errors {
-  timeEntryDescription?: string
-  timeEntry?: string
-}
-
 const initialErrorsState = {
   timeEntryDescription: undefined,
   timeEntry: undefined,
@@ -60,7 +55,7 @@ const initialErrorsState = {
 
 export const useOnAdd = (props: UseOnAddProps) => {
   const ctx = useContext(EntryListContext)
-  const [errors, setErrors] = useState<Errors>(initialErrorsState)
+  const [errors, setErrors] = useState<TimeEntryErrors>(initialErrorsState)
 
   const validate = () => {
     if (!props.timeEntryDescription)

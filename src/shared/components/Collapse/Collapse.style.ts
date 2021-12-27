@@ -14,7 +14,7 @@ export const CollapseHeader = styled('header')<CollapseHeaderProps>(
   ({ open }) => ({
     cursor: 'pointer',
     fontSize: typography.fontSize.regular,
-    fontWeight: typography.fontWeight.medium,
+    fontWeight: typography.fontWeight.regular,
     display: 'flex',
     alignItems: 'center',
     gap: SPACING_MID,

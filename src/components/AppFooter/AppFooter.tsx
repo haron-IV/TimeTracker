@@ -1,7 +1,8 @@
 import { BsGear } from 'react-icons/bs'
+import { Button } from 'shared/components'
 import { SpaceInfo } from 'shared/types'
 import { useToggle } from 'shared/utils'
-import { Footer, SettingsButton } from './AppFooter.style'
+import { Footer } from './AppFooter.style'
 import MemoryUse from './MemoryUse'
 import SettingsModal from './SettingsModal'
 
@@ -15,9 +16,9 @@ const AppFooter = ({ spaceInfo: { used } }: AppFooterProps) => {
   return (
     <Footer>
       <SettingsModal {...{ open, toggleOpen }} />
-      <SettingsButton onClick={toggleOpen}>
+      <Button onClick={toggleOpen} color="primary">
         <BsGear />
-      </SettingsButton>
+      </Button>
       <MemoryUse {...used} />
     </Footer>
   )

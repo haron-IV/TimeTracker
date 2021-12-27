@@ -7,6 +7,7 @@ import {
   SPACING_REGULAR,
   Z_INDEX_REGULAR,
 } from 'config'
+import { Input as BaseInput } from 'shared/components'
 import styled from 'styled-components'
 
 export const LabelsWrapper = styled('section')({
@@ -54,5 +55,10 @@ export const EditLabelNameWrapper = styled('div')({
   borderRadius: DEFAULT_BORDER_RADIUS,
   width: LABEL_WIDTH,
   maxWidth: LABEL_WIDTH,
+  height: LABEL_HEIGHT,
+})
+
+export const Input = styled(BaseInput)({
+  width: LABEL_WIDTH,
   height: LABEL_HEIGHT,
 })

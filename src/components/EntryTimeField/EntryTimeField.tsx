@@ -1,13 +1,8 @@
-import { ErrorIndicator } from 'shared/components'
+import { Input } from 'shared/components'
 import { setTimeFunc } from 'shared/types'
 import { HOURS_LIMIT, MINUTES_LIMIT } from '../../config'
 import { useEntryTimeField } from './EntryTime.utils'
-import {
-  FieldWrapper,
-  Form,
-  TimeField,
-  TimeLabel,
-} from './EntryTimeField.style'
+import { Form } from './EntryTimeField.style'
 
 interface EntryTimeFieldProps {
   hours: number
@@ -26,34 +21,28 @@ const EntryTimeField = ({
 
   return (
     <Form>
-      <FieldWrapper>
-        <TimeLabel visible={!!hours}>Hours</TimeLabel>
-        <TimeField
-          name="hours"
-          placeholder="hours"
-          type="number"
-          value={hours || ''}
-          onChange={e => handleChange(e.target.value, HOURS_LIMIT, setHours)}
-          max={HOURS_LIMIT}
-          error={error.hours}
-        />
-        <ErrorIndicator error={error.hours}>{error.hours}</ErrorIndicator>
-      </FieldWrapper>
+      <Input
+        color="primary"
+        name="hours"
+        placeholder="hours"
+        type="number"
+        value={hours || ''}
+        onChange={e => handleChange(e.target.value, HOURS_LIMIT, setHours)}
+        max={HOURS_LIMIT}
+        error={error.hours}
+        width={100}
+      />
 
-      <FieldWrapper>
-        <TimeLabel visible={!!minutes}>Minutes</TimeLabel>
-        <TimeField
-          name="minutes"
-          placeholder="minutes"
-          type="number"
-          value={minutes || ''}
-          onChange={e =>
-            handleChange(e.target.value, MINUTES_LIMIT, setMinutes)
-          }
-          error={error.minutes}
-        />
-        <ErrorIndicator error={error.minutes}>{error.minutes}</ErrorIndicator>
-      </FieldWrapper>
+      <Input
+        color="primary"
+        name="minutes"
+        placeholder="minutes"
+        type="number"
+        value={minutes || ''}
+        onChange={e => handleChange(e.target.value, MINUTES_LIMIT, setMinutes)}
+        error={error.minutes}
+        width={100}
+      />
     </Form>
   )
 }
