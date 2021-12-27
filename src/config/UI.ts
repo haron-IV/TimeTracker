@@ -35,3 +35,5 @@ export const FOOTER_HEIGHT = 50
 export const Z_INDEX_MIN = 0
 export const Z_INDEX_REGULAR = 100
 export const Z_INDEX_MID = 200
+
+export const HEADER_TIME_INPUT_WIDTH = 95

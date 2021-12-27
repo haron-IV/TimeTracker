@@ -7,29 +7,12 @@ import {
   zIndex,
 } from 'config'
 import { lighten } from 'polished'
-import { Color } from 'shared/types'
+import { getColor } from 'shared/utils'
 import styled from 'styled-components'
 import { InputProps } from './Input'
 
 interface InputWrapperProps extends InputProps {
   width?: string | number
-}
-
-//TODO: make this function reusable
-const getColor = (color: Color, error?: string) => {
-  if (error) return palette.error
-
-  switch (color) {
-    case 'primary': {
-      return palette.primary.primary
-    }
-    case 'text': {
-      return palette.text.dark
-    }
-    default: {
-      return color
-    }
-  }
 }
 
 type StyledInputProps = Pick<InputProps, 'color' | 'error'>

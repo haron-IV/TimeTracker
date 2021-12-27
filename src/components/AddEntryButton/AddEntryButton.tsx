@@ -1,5 +1,5 @@
-import { TimeEntryErrors } from 'components/TimeEntrySection/TimeEntrySection.utils'
 import { Button } from 'shared/components'
+import { TimeEntryErrors } from 'shared/types'
 
 interface AddEntryButtonProps {
   onClick: () => void

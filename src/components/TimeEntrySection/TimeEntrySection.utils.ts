@@ -1,7 +1,7 @@
 import { validation } from 'config'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { DB } from 'services'
-import { ID, Label } from 'shared/types'
+import { ID, Label, TimeEntryErrors } from 'shared/types'
 import { EntryListContext, LabelsContext } from 'shared/utils'
 
 const db = new DB()
@@ -46,11 +46,6 @@ interface UseOnAddProps {
   selectedLabels: SelectedLabels
   entryTimeHours: number
   entryTimeMinutes: number
-}
-
-export interface TimeEntryErrors {
-  timeEntryDescription?: string
-  timeEntry?: string
 }
 
 const initialErrorsState = {

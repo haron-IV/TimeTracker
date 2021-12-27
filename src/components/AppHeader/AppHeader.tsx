@@ -1,5 +1,5 @@
 import { H1, Input } from 'shared/components'
-import { MINUTES_LIMIT } from '../../config'
+import { MINUTES_LIMIT, HEADER_TIME_INPUT_WIDTH } from '../../config'
 import {
   Header,
   TimeCalculatorWrapper,
@@ -24,7 +24,7 @@ const TimeCalculator = () => {
           onChange={e => handleChange(e.target.value)}
           max={MINUTES_LIMIT + 2}
           error={error}
-          width={95}
+          width={HEADER_TIME_INPUT_WIDTH}
         />
         <TimeOutput>{scaledTime === 100 ? '1 hour' : scaledTime}</TimeOutput>
       </TimeFieldWrapper>

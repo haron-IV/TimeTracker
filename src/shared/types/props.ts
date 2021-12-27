@@ -10,3 +10,7 @@ export interface LabelProps {
   active?: boolean
 }
 export type Color = 'primary' | 'text' | string
+export interface TimeEntryErrors {
+  timeEntryDescription?: string
+  timeEntry?: string
+}

@@ -1,6 +1,7 @@
 import { palette } from 'config'
 import { darken, lighten } from 'polished'
 import { Color } from 'shared/types'
+import { getColor } from 'shared/utils'
 import styled from 'styled-components'
 
 type Size = string | number
@@ -11,22 +12,6 @@ export interface TextAreaProps {
   error?: string
   width?: Size
   height?: Size
-}
-
-const getColor = (color: Color, error?: string) => {
-  if (error) return palette.error
-
-  switch (color) {
-    case 'primary': {
-      return palette.primary.primary
-    }
-    case 'text': {
-      return palette.text.dark
-    }
-    default: {
-      return color
-    }
-  }
 }
 
 export const TextArea = styled('textarea')<TextAreaProps>(

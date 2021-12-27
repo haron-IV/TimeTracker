@@ -8,7 +8,6 @@ import {
   zIndex,
 } from 'config'
 import { lighten } from 'polished'
-import { MouseEvent } from 'react'
 import styled, { CSSProperties } from 'styled-components'
 import { BaseButtonProps } from './Button.types'
 
