@@ -7,7 +7,7 @@ const ContentContainer = styled('div')({
   height: `calc(100vh - ${CONTAINER_PADDING}px)`,
 })
 
-type ContainerProps = PropsWithChildren<{}>
+type ContainerProps = PropsWithChildren<unknown>
 
 const Container = ({ children }: ContainerProps) => (
   <ContentContainer>{children}</ContentContainer>

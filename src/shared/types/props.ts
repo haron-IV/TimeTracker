@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react'
+import React, { MouseEventHandler } from 'react'
 import { ID } from './index'
 
 export type ChangeEvent<T> = React.ChangeEvent<{ value: T }>

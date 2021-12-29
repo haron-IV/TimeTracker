@@ -12,4 +12,4 @@ export interface ButtonProps
   onMouseMove?: MouseEventHandler<HTMLButtonElement>
 }
 
-export interface BaseButtonProps extends Omit<ButtonProps, 'onClick'> {}
+export type BaseButtonProps = Omit<ButtonProps, 'onClick'>
