@@ -4,7 +4,7 @@ import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 import { DB, TimeEntry } from 'services'
 import { Button, TextArea } from 'shared/components'
 import { Label } from 'shared/types'
-import { EntryListContext } from 'shared/utils'
+import { EditEntryContext, EntryListContext } from 'shared/utils'
 import { EntryTimeField, Labels } from '../../index'
 import { ActionsWrapper, Item } from './ListItem.style'
 import { calculateTimeEntry, getSelectedLabels } from './ListItem.utils'
@@ -24,6 +24,7 @@ const ListItem = ({
   id,
 }: ListItemProps) => {
   const { setUpdateEntryList } = useContext(EntryListContext) || {}
+  const { setEditing, editing } = useContext(EditEntryContext) || {}
   const deleteEntry = () => {
     db.deleteTimeEntry(id)
     setUpdateEntryList?.(true)
@@ -36,6 +37,7 @@ const ListItem = ({
         color="primary"
         height={75}
         width={400}
+        disabled={id !== editing}
       />
       <Labels
         labels={labels}
@@ -54,7 +56,11 @@ const ListItem = ({
         >
           <BsFillTrashFill />
         </Button>
-        <Button color="primary" margin={`${SPACING_SMALL}px 0 0 0`}>
+        <Button
+          color="primary"
+          margin={`${SPACING_SMALL}px 0 0 0`}
+          onClick={() => setEditing?.(id)}
+        >
           <BsFillPencilFill />
         </Button>
       </ActionsWrapper>
