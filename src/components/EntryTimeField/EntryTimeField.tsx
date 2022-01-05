@@ -1,14 +1,14 @@
-import { Input } from 'shared/components'
 import { setTimeFunc } from 'shared/types'
 import { HOURS_LIMIT, MINUTES_LIMIT } from '../../config'
 import { useEntryTimeField } from './EntryTime.utils'
-import { Form } from './EntryTimeField.style'
+import { Form, Input } from './EntryTimeField.style'
 
 interface EntryTimeFieldProps {
   hours: number
   minutes: number
   setHours?: setTimeFunc
   setMinutes?: setTimeFunc
+  disabled?: boolean
 }
 
 const EntryTimeField = ({
@@ -16,6 +16,7 @@ const EntryTimeField = ({
   minutes,
   setHours,
   setMinutes,
+  disabled = false,
 }: EntryTimeFieldProps) => {
   const { error, handleChange } = useEntryTimeField()
 
@@ -31,6 +32,7 @@ const EntryTimeField = ({
         max={HOURS_LIMIT}
         error={error.hours}
         width={100}
+        disabled={disabled}
       />
 
       <Input
@@ -42,6 +44,7 @@ const EntryTimeField = ({
         onChange={e => handleChange(e.target.value, MINUTES_LIMIT, setMinutes)}
         error={error.minutes}
         width={100}
+        disabled={disabled}
       />
     </Form>
   )

@@ -45,7 +45,11 @@ const ListItem = ({
         selectedLabels={getSelectedLabels(labels, selectedLabels)}
         disabled={disabled}
       />
-      <EntryTimeField hours={entryTimeHours} minutes={entryTimeMinutes} />
+      <EntryTimeField
+        hours={entryTimeHours}
+        minutes={entryTimeMinutes}
+        disabled={disabled}
+      />
       <div>
         Scaled time: {calculateTimeEntry(entryTimeHours, entryTimeMinutes)}
       </div>
