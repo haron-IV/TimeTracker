@@ -25,10 +25,11 @@ export const AddNewLabel = ({ onAdd }: AddNewLabelProps) => {
     setLabelName(e.target.value)
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!onAdd) return
     if (e.charCode !== 13) return
     db.addNewLabel(labelName)
     setInitiated(false)
-    onAdd && onAdd(true)
+    onAdd(true)
     setLabelName('')
   }
 

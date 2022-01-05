@@ -29,6 +29,7 @@ const ListItem = ({
     db.deleteTimeEntry(id)
     setUpdateEntryList?.(true)
   }
+  const disabled = id !== editing
 
   return (
     <Item>
@@ -37,11 +38,12 @@ const ListItem = ({
         color="primary"
         height={75}
         width={400}
-        disabled={id !== editing}
+        disabled={disabled}
       />
       <Labels
         labels={labels}
         selectedLabels={getSelectedLabels(labels, selectedLabels)}
+        disabled={disabled}
       />
       <EntryTimeField hours={entryTimeHours} minutes={entryTimeMinutes} />
       <div>

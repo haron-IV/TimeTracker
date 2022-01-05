@@ -11,6 +11,7 @@ export interface TextAreaProps extends BaseTextAreaProps {
 }
 const TextArea = (props: TextAreaProps) => {
   return (
+    // TODO: add tooltip here based on a props
     <>
       <BaseTextArea {...props} />
       <ErrorIndicator error={props.error}>{props.error}</ErrorIndicator>
