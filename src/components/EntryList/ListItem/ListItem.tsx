@@ -1,6 +1,6 @@
 import { SPACING_SMALL } from 'config'
 import { useContext } from 'react'
-import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
+import { BsCheckLg, BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 import { DB, TimeEntry } from 'services'
 import { Button, TextArea } from 'shared/components'
 import { Label } from 'shared/types'
@@ -28,6 +28,10 @@ const ListItem = ({
   const deleteEntry = () => {
     db.deleteTimeEntry(id)
     setUpdateEntryList?.(true)
+  }
+  const toggleEditing = () => {
+    setEditing?.(id)
+    if (editing === id) setEditing?.(null)
   }
   const disabled = id !== editing
 
@@ -65,9 +69,9 @@ const ListItem = ({
         <Button
           color="primary"
           margin={`${SPACING_SMALL}px 0 0 0`}
-          onClick={() => setEditing?.(id)}
+          onClick={toggleEditing}
         >
-          <BsFillPencilFill />
+          {disabled ? <BsFillPencilFill /> : <BsCheckLg />}
         </Button>
       </ActionsWrapper>
     </Item>
