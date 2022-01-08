@@ -4,6 +4,7 @@ import {
   SPACING_MID,
   SPACING_SMALL,
   transition,
+  zIndex,
 } from 'config'
 import { Position } from 'shared/types'
 import styled from 'styled-components'
@@ -31,4 +32,5 @@ export const BaseTooltip = styled('span')<BaseTooltipProps>(({ position }) => ({
   margin: SPACING_SMALL,
   clipPath:
     'polygon(0% 0%, 100% 0%, 100% 70%, 56% 70%, 50% 100%, 40% 70%, 0 70%)',
+  zIndex: zIndex.max,
 }))

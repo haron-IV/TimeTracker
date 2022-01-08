@@ -5,7 +5,6 @@ import {
   SPACING_SMALL,
   transition,
   typography,
-  zIndex,
 } from 'config'
 import { lighten } from 'polished'
 import styled, { CSSProperties } from 'styled-components'
@@ -115,35 +114,6 @@ export const BaseButton = styled('button')<BaseButtonProps>(
       transform: 'scale(0.98)',
       boxShadow: palette.shadows.box1,
       // TODO: add animation here
-    },
-  })
-)
-interface ButtonWrapperProps {
-  position: {
-    x: number
-    y: number
-  }
-}
-export const ButtonWrapper = styled('div')<ButtonWrapperProps>(
-  ({ position }) => ({
-    span: {
-      opacity: 0,
-      position: 'absolute',
-      transition: `opacity ease-in-out ${transition.time.fast}ms`,
-      backgroundColor: palette.text.secondary,
-      color: palette.text.text,
-      padding: `${SPACING_SMALL}px ${SPACING_MID}px`,
-      borderRadius: DEFAULT_BORDER_RADIUS,
-      margin: SPACING_SMALL,
-      width: 'auto',
-      height: 'inherit',
-      left: 0,
-      top: 0,
-      transform: `translate(${position.x}px, ${position.y}px)`,
-    },
-    'button:hover ~ span': {
-      opacity: 1,
-      zIndex: zIndex.max,
     },
   })
 )

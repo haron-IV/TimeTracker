@@ -1,8 +1,9 @@
-import { SPACING_SMALL } from 'config'
+import { DISABLED_ENTRY_LIST_ITEMS_TEXT, SPACING_SMALL } from 'config'
 import { useContext } from 'react'
 import { BsCheckLg, BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 import { DB, TimeEntry } from 'services'
-import { Button, TextArea } from 'shared/components'
+import { Button, TextArea, Tooltip } from 'shared/components'
+
 import { Label } from 'shared/types'
 import { EditEntryContext, EntryListContext } from 'shared/utils'
 import { EntryTimeField, Labels } from '../../index'
@@ -37,23 +38,29 @@ const ListItem = ({
 
   return (
     <Item>
-      <TextArea
-        value={timeEntryDescription}
-        color="primary"
-        height={75}
-        width={400}
-        disabled={disabled}
-      />
-      <Labels
-        labels={labels}
-        selectedLabels={getSelectedLabels(labels, selectedLabels)}
-        disabled={disabled}
-      />
-      <EntryTimeField
-        hours={entryTimeHours}
-        minutes={entryTimeMinutes}
-        disabled={disabled}
-      />
+      <Tooltip show={disabled} text={DISABLED_ENTRY_LIST_ITEMS_TEXT}>
+        <TextArea
+          value={timeEntryDescription}
+          color="primary"
+          height={75}
+          width={400}
+          disabled={disabled}
+        />
+      </Tooltip>
+      <Tooltip show={disabled} text={DISABLED_ENTRY_LIST_ITEMS_TEXT}>
+        <Labels
+          labels={labels}
+          selectedLabels={getSelectedLabels(labels, selectedLabels)}
+          disabled={disabled}
+        />
+      </Tooltip>
+      <Tooltip show={disabled} text={DISABLED_ENTRY_LIST_ITEMS_TEXT}>
+        <EntryTimeField
+          hours={entryTimeHours}
+          minutes={entryTimeMinutes}
+          disabled={disabled}
+        />
+      </Tooltip>
       <div>
         Scaled time: {calculateTimeEntry(entryTimeHours, entryTimeMinutes)}
       </div>

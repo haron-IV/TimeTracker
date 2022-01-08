@@ -7,9 +7,15 @@ const MOUSE_OFFSET = 15
 type MouseMoveEvent = MouseEvent<HTMLDivElement, globalThis.MouseEvent>
 
 interface TooltipProps {
+  show?: boolean
   text?: string
 }
-const Tooltip = ({ children, text }: PropsWithChildren<TooltipProps>) => {
+const Tooltip = ({
+  children,
+  text,
+  show = true,
+}: PropsWithChildren<TooltipProps>) => {
+  //TODO: 1) if tooltip run over the x direction of the screen it should be moved
   const wrapperRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLSpanElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -27,9 +33,11 @@ const Tooltip = ({ children, text }: PropsWithChildren<TooltipProps>) => {
 
   return (
     <TooltipWrapper onMouseMove={onMouseMoveHandler} ref={wrapperRef}>
-      <BaseTooltip ref={tooltipRef} position={position}>
-        {text}
-      </BaseTooltip>
+      {show && (
+        <BaseTooltip ref={tooltipRef} position={position}>
+          {text}
+        </BaseTooltip>
+      )}
       {children}
     </TooltipWrapper>
   )

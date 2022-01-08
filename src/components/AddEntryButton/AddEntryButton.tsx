@@ -14,7 +14,7 @@ const AddEntryButton = ({ onClick, errors }: AddEntryButtonProps) => {
     <Button
       color="primary"
       onClick={() => onClick()}
-      disabled={disabled}
+      isDisabled={disabled}
       disabledTooltip={disabledMessage}
     >
       Add
