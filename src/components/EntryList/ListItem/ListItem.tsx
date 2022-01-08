@@ -1,16 +1,16 @@
 import { DISABLED_ENTRY_LIST_ITEMS_TEXT, SPACING_SMALL } from 'config'
-import { useContext } from 'react'
 import { BsCheckLg, BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
-import { DB, TimeEntry } from 'services'
+import { TimeEntry } from 'services'
 import { Button, TextArea, Tooltip } from 'shared/components'
-
 import { Label } from 'shared/types'
-import { EditEntryContext, EntryListContext } from 'shared/utils'
 import { EntryTimeField, Labels } from '../../index'
 import { ActionsWrapper, Item } from './ListItem.style'
-import { calculateTimeEntry, getSelectedLabels } from './ListItem.utils'
-
-const db = new DB()
+import {
+  calculateTimeEntry,
+  getSelectedLabels,
+  useDeleteEntry,
+  useEdit,
+} from './ListItem.utils'
 
 interface ListItemProps extends TimeEntry {
   labels: Label[]
@@ -24,17 +24,8 @@ const ListItem = ({
   labels,
   id,
 }: ListItemProps) => {
-  const { setUpdateEntryList } = useContext(EntryListContext) || {}
-  const { setEditing, editing } = useContext(EditEntryContext) || {}
-  const deleteEntry = () => {
-    db.deleteTimeEntry(id)
-    setUpdateEntryList?.(true)
-  }
-  const toggleEditing = () => {
-    setEditing?.(id)
-    if (editing === id) setEditing?.(null)
-  }
-  const disabled = id !== editing
+  const deleteEntry = useDeleteEntry(id)
+  const { disabled, toggleEditing } = useEdit(id)
 
   return (
     <Item>
