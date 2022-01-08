@@ -1,4 +1,5 @@
 import { memo, useCallback, useContext } from 'react'
+import Tooltip from 'shared/components/Tooltip'
 import { ID, Label } from 'shared/types'
 import { LabelsContext } from 'shared/utils'
 import { AddNewLabel, LabelItem } from './AddNewLabel'
@@ -27,18 +28,21 @@ const Labels = ({
   console.log('disabled', disabled)
 
   return (
-    <LabelWrapper disabled={disabled}>
-      {labels?.map(({ id, name }) => (
-        <LabelItem
-          labelName={name}
-          key={id}
-          id={id}
-          onClick={() => !disabled && onClick?.(id)}
-          active={isLabelSelected(id)}
-        />
-      ))}
-      <AddNewLabel onAdd={!disabled ? ctx?.setUpdateLabels : undefined} />
-    </LabelWrapper>
+    <Tooltip text="co do kurwy">
+      <LabelWrapper disabled={disabled}>
+        {labels?.map(({ id, name }) => (
+          <LabelItem
+            labelName={name}
+            key={id}
+            id={id}
+            onClick={() => !disabled && onClick?.(id)}
+            active={isLabelSelected(id)}
+          />
+        ))}
+
+        <AddNewLabel onAdd={!disabled ? ctx?.setUpdateLabels : undefined} />
+      </LabelWrapper>
+    </Tooltip>
   )
 }
 
