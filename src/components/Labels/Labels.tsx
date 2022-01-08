@@ -8,9 +8,15 @@ interface LabelsProps {
   labels?: Label[]
   onClick?: (id: ID) => void
   selectedLabels?: ID[]
+  disabled?: boolean
 }
 
-const Labels = ({ labels, onClick, selectedLabels }: LabelsProps) => {
+const Labels = ({
+  labels,
+  onClick,
+  selectedLabels,
+  disabled = false,
+}: LabelsProps) => {
   const ctx = useContext(LabelsContext)
 
   const isLabelSelected = useCallback(
@@ -19,17 +25,18 @@ const Labels = ({ labels, onClick, selectedLabels }: LabelsProps) => {
   )
 
   return (
-    <LabelWrapper>
+    <LabelWrapper disabled={disabled}>
       {labels?.map(({ id, name }) => (
         <LabelItem
           labelName={name}
           key={id}
           id={id}
-          onClick={() => onClick && onClick(id)}
+          onClick={() => !disabled && onClick?.(id)}
           active={isLabelSelected(id)}
         />
       ))}
-      <AddNewLabel onAdd={ctx?.setUpdateLabels} />
+
+      <AddNewLabel onAdd={!disabled ? ctx?.setUpdateLabels : undefined} />
     </LabelWrapper>
   )
 }

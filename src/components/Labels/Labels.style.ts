@@ -9,6 +9,7 @@ import {
   transition,
   typography,
 } from 'config'
+import { darken } from 'polished'
 import { LabelProps } from 'shared/types'
 import styled from 'styled-components'
 
@@ -38,8 +39,24 @@ export const StyledLabel = styled('button')<LabelProps>(({ active }) => ({
   },
 }))
 
-export const LabelWrapper = styled('div')({
-  display: 'flex',
-  width: LABEL_WRAPPER_WIDTH,
-  flexWrap: 'wrap',
-})
+interface LabelWrapperProps {
+  disabled: boolean
+}
+export const LabelWrapper = styled('div')<LabelWrapperProps>(
+  ({ disabled }) => ({
+    display: 'flex',
+    width: LABEL_WRAPPER_WIDTH,
+    flexWrap: 'wrap',
+
+    ...(disabled && {
+      '& button:hover': {
+        backgroundColor: palette.disabled,
+        borderColor: darken(0.2, palette.disabled),
+        cursor: 'not-allowed',
+      },
+      '& button:last-of-type': {
+        display: 'none',
+      },
+    }),
+  })
+)

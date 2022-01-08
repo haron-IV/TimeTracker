@@ -9,8 +9,9 @@ export const getScaledMinutes = (minutes: number) =>
 export const daysInMonth = (month: number, year: number) =>
   new Date(year, month, 0).getDate()
 
-export const getColor = (color: Color, error?: string) => {
+export const getColor = (color: Color, error?: string, disabled?: boolean) => {
   if (error) return palette.error
+  if (disabled) return palette.disabled
 
   switch (color) {
     case 'primary': {

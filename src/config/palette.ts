@@ -13,6 +13,7 @@ export const palette = {
     accent: '#607D8B',
   },
   divider: '#BDBDBD',
+  disabled: '#d3d3d3',
   shadows: {
     box0: '0 3px 3px rgb(0 0 0 / 11%), 0 3px 3px rgb(0 0 0 / 5%)',
     box1: '0 3px 5px rgb(0 0 0 / 20%), 0 3px 5px rgb(0 0 0 / 5%)',

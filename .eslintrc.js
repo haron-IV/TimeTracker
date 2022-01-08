@@ -37,7 +37,7 @@ module.exports = {
     'explicit-module-boundary-types': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'jsx-a11y/no-autofocus': 'off',
-    'no-console': 2,
+    'no-console': 1,
   },
   settings: {
     react: {
